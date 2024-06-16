@@ -14,13 +14,11 @@ const queryClient = new QueryClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
         <RecoilRoot>
           <Component {...pageProps} />
         </RecoilRoot>
         <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </>
+    </QueryClientProvider>
   );
 }
