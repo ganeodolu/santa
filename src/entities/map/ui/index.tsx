@@ -4,8 +4,11 @@ import dynamic from "next/dynamic";
 
 type Props = {}
 
+const LeafletMapWithNoSSR = dynamic(() => import("./LeafletMap.tsx"), {
+  ssr: false
+});
+
 const Map = (props: Props) => {
-  const LeafletMapWithNoSSR = dynamic(() => import("./leafletMap"));
   return (
     <div>
       <LeafletMapWithNoSSR />
