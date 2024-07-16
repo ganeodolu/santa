@@ -19,7 +19,7 @@ const LeafletMap = (props: Props) => {
       />
       <Marker position={[37.65933150575183, 126.9778332895154]}>
         <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
+          북한산 <br /> Easily customizable.
         </Popup>
       </Marker>
     </MapContainer>
