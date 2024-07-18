@@ -1,14 +1,15 @@
 import React from 'react'
-import { useRecoilState } from "recoil";
-import { mountainIndexState, parkNames } from '@/shared';
+import { atom, useAtom } from 'jotai';
+import { parkNames } from '@/shared';
 
 type Props = {}
 
+const mountainIndexAtom = atom(0)
+
 const CurrentMountainName = (props: Props) => {
-  const [currentMountainIndexState, setCurrentMountainIndexState] =
-    useRecoilState(mountainIndexState);
+  const [mountainIndex, setMountainIndex] = useAtom(mountainIndexAtom) 
   
-  return <div>{parkNames[currentMountainIndexState]}</div>;
+  return <div>{parkNames[mountainIndex]}</div>;
 }
 
 export default CurrentMountainName
