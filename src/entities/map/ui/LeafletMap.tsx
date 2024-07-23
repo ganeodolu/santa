@@ -8,7 +8,8 @@ type Props = {};
 const LeafletMap = (props: Props) => {
   return (
     <MapContainer
-      center={[37.65933150575183, 126.9778332895154]}
+      center={[37.645175709619025, 126.97477909129488
+]}
       zoom={13}
       scrollWheelZoom={false}
       style={{ width: "100%", height: "80vh" }}
@@ -17,7 +18,8 @@ const LeafletMap = (props: Props) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[37.65933150575183, 126.9778332895154]}>
+      <Marker position={[37.645175709619025, 126.97477909129488
+]}>
         <Popup>
           북한산 <br /> Easily customizable.
         </Popup>
