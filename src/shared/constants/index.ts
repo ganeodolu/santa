@@ -1,6 +1,17 @@
 export const mountainNames = ["북한산", "설악산"];
 
-export const mountainInformation = {
+interface Mountain {
+  name: string;
+  lat: number;
+  lon: number;
+}
+
+interface MountainInformation {
+  [key: string]: Mountain;
+}
+
+
+export const mountainInformation: MountainInformation = {
   "bukhan": {
     name: "북한산",
     lat: 37.645175709619025,
