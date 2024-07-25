@@ -1,15 +1,15 @@
 import React from 'react'
-import { atom, useAtom } from 'jotai';
-import { parkNames } from '@/shared';
+import { mountainInformation } from '@/shared';
+import { useSearchParams } from "next/navigation";
 
 type Props = {}
 
-const mountainIndexAtom = atom(0)
 
 const CurrentMountainName = (props: Props) => {
-  const [mountainIndex, setMountainIndex] = useAtom(mountainIndexAtom) 
+  const searchParams = useSearchParams();
+  const search = searchParams.get("mountainName");
   
-  return <div>{parkNames[mountainIndex]}</div>;
+  return <div>{mountainInformation[search]?.name}</div>;
 }
 
 export default CurrentMountainName

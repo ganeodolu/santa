@@ -1,3 +1,3 @@
-import { parkNames } from "@/shared/constants";
+import { mountainInformation } from "@/shared/constants";
 
-export { parkNames };
+export { mountainInformation };

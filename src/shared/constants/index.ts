@@ -1,6 +1,6 @@
-export const parkNames = ["북한산", "설악산"];
+export const mountainNames = ["북한산", "설악산"];
 
-export const parkInformation = {
+export const mountainInformation = {
   "bukhan": {
     name: "북한산",
     lat: 37.645175709619025,

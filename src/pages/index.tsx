@@ -7,12 +7,12 @@ export default function IndexPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const search = searchParams.get("parkName");
+  const search = searchParams.get("mountainName");
 
   useEffect(() => {
     if (!search) {
       router.push({
-        query: { parkName: "bukhan" }
+        query: { mountainName: "bukhan" }
       });
     }
   }, [])
