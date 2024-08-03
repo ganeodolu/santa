@@ -4,19 +4,19 @@ import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function IndexPage() {
-  const router = useRouter();
+  // const router = useRouter();
   const searchParams = useSearchParams();
   const search = searchParams?.get("mountainName");
   console.log(search);
 
-  useEffect(() => {
-    console.log(search)
-    // if (!search) {
-    //   router.push({
-    //     query: { mountainName: "bukhan" }
-    //   });
-    // }
-  }, [])
+  // useEffect(() => {
+  //   console.log(search)
+  //   // if (!search) {
+  //   //   router.push({
+  //   //     query: { mountainName: "bukhan" }
+  //   //   });
+  //   // }
+  // }, [])
   
   return (
     <main
