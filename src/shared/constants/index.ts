@@ -19,7 +19,7 @@ export const MOUNTAIN_NAMES = [
   "한라산"
 ];
 
-interface Mountain {
+export interface Mountain {
   name: string;
   lat: number;
   lon: number;
@@ -32,7 +32,7 @@ interface MountainInformation {
   [key: string]: Mountain;
 }
 
-export const mountainInformation: MountainInformation = {
+export const MOUNTAIN_INFORMATION: MountainInformation = {
   gaya: {
     name: "가야산",
     lat: 35.8235606,
