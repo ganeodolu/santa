@@ -1,8 +1,12 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
-type Props = {};
+type Props = {
+  searchKeyword: string;
+  // onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
+};
 
-const Header = (props: Props) => {
+const Header = ({searchKeyword, onChange}: Props) => {
   return (
     <header className="sticky top-0 bg-white shadow-md">
       <div className="container mx-auto px-4 py-4">
@@ -26,8 +30,10 @@ const Header = (props: Props) => {
           <div className="relative flex-grow">
             <input
               type="search"
+              value={searchKeyword}
+              onChange={(e) => onChange(e.target.value)}
               className="w-full rounded-lg border border-gray-300 py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="검색..."
+              placeholder="산 찾기"
             />
             <div className="absolute left-3 top-2">
               <svg
