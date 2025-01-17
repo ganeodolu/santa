@@ -2,7 +2,6 @@ import React, { ChangeEvent } from "react";
 
 type Props = {
   searchKeyword: string;
-  // onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onChange: (value: string) => void;
 };
 
