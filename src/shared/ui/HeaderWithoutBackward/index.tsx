@@ -1,8 +1,8 @@
-import React from "react";
+type Props = {
+  onInputClick: () => void;
+};
 
-type Props = {};
-
-const HeaderWithoutBackward = (props: Props) => {
+const HeaderWithoutBackward = ({ onInputClick }: Props) => {
   return (
     <header className="sticky top-0 bg-white shadow-md">
       <div className="container mx-auto px-4 py-4">
@@ -11,7 +11,8 @@ const HeaderWithoutBackward = (props: Props) => {
             <input
               type="search"
               className="w-full rounded-lg border border-gray-300 py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="검색..."
+              placeholder="산 찾기"
+              onClick={onInputClick}
             />
             <div className="absolute left-3 top-2">
               <svg
