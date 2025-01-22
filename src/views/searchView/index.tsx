@@ -1,5 +1,5 @@
+import SearchHeaderWithBack from "@/features/Header/ui/SearchHeaderWithBack";
 import { useSearch } from "@/shared/model/useSearchKeyword";
-import Header from "@/shared/ui/Header";
 import RecentKeyword from "@/views/searchView/ui/RecentKeyword";
 import SearchResult from "@/views/searchView/ui/SearchResult";
 
@@ -10,7 +10,10 @@ const SearchView = (props: Props) => {
 
   return (
     <div className="mx-auto max-w-[500px] rounded-lg bg-white shadow-md">
-      <Header searchKeyword={searchKeyword} onChange={handleChange} />
+      <SearchHeaderWithBack
+        searchKeyword={searchKeyword}
+        onChange={handleChange}
+      />
       <section className="min-h-screen">
         <RecentKeyword />
         <SearchResult searchResults={searchResults} />
