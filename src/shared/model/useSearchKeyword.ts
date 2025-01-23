@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback } from "react";
-import { debounce } from '@/shared/lib';
-import { MOUNTAIN_INFORMATION } from "@/shared/constants";
 import type { Mountain } from "@/shared/constants";
+import { MOUNTAIN_INFORMATION_LIST } from "@/shared/constants";
+import { debounce } from "@/shared/lib";
+import { useCallback, useEffect, useState } from "react";
 
 export const useSearch = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [searchResults, setSearchResults] = useState<Mountain[]>([])
+  const [searchResults, setSearchResults] = useState<Mountain[]>([]);
 
   const performSearch = (keyword: string, array: any[]) => {
     const results = array.filter(({ name }) => {
@@ -16,18 +16,14 @@ export const useSearch = () => {
         return true;
       }
     });
-    return results
-  } 
+    return results;
+  };
 
   const debouncedSearch = useCallback(
     debounce((keyword: string) => {
       console.log("검색어:", keyword);
-      const results = performSearch(
-        keyword,
-        Object.values(MOUNTAIN_INFORMATION)
-      );
-      setSearchResults(results)
-
+      const results = performSearch(keyword, MOUNTAIN_INFORMATION_LIST);
+      setSearchResults(results);
     }, 500),
     []
   );
@@ -39,13 +35,11 @@ export const useSearch = () => {
 
   useEffect(() => {
     if (searchKeyword) {
-      debouncedSearch(searchKeyword)
+      debouncedSearch(searchKeyword);
     } else {
-      setSearchResults([])
+      setSearchResults([]);
     }
-
-  }, [searchKeyword, debouncedSearch])
-  
+  }, [searchKeyword, debouncedSearch]);
 
   return { searchKeyword, searchResults, handleChange };
 };
