@@ -1,3 +1,3 @@
-import { mountainInformation } from "@/shared/constants";
+import { MOUNTAIN_INFORMATION } from "@/shared/constants";
 
-export { mountainInformation };
+export { MOUNTAIN_INFORMATION };
