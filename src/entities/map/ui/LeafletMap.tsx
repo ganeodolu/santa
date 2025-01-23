@@ -2,36 +2,28 @@ import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { mountainInformation } from "@/shared";
-import { useSearchParams } from "next/navigation";
 
-type Props = {};
+type Props = {
+  name: string;
+  center: [number, number];
+  zoom: number;
+};
 
-const LeafletMap = (props: Props) => {
-  const searchParams = useSearchParams();
-  const search = searchParams?.get("mountainName");
-
-  let {name, lat, lon } = mountainInformation['bukhan']
-  if (search) {
-    name = mountainInformation[search].name
-    lat = mountainInformation[search].lat
-    lon = mountainInformation[search].lon
-  } 
+const LeafletMap = ({name, center, zoom}: Props) => {
+  // FIXME: 지역변경시 지도 적용 안됨 처음에 기본이고 나중에 바뀌었는데 이미 지도에 반영되어서 그런듯
   
   return (
     <MapContainer
-      center={[lat, lon
-]}
-      zoom={13}
-      scrollWheelZoom={false}
-      style={{ width: "100%", height: "80vh" }}
+      center={center}
+      zoom={zoom}
+      scrollWheelZoom={true}
+      style={{ width: "100%", height: "60vh" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[lat, lon
-]}>
+      <Marker position={center}>
         <Popup>
           {name} <br />
         </Popup>
