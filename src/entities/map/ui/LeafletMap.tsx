@@ -10,14 +10,13 @@ type Props = {
 };
 
 const LeafletMap = ({name, center, zoom}: Props) => {
-  // FIXME: 지역변경시 지도 적용 안됨 처음에 기본이고 나중에 바뀌었는데 이미 지도에 반영되어서 그런듯
   
   return (
     <MapContainer
       center={center}
       zoom={zoom}
       scrollWheelZoom={true}
-      style={{ width: "100%", height: "60vh" }}
+      style={{ width: "100%", height: "40vh" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
