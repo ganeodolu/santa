@@ -22,6 +22,7 @@
     "recharts": "^2.15.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@tanstack/react-query-devtools": "^5.64.2",
     "@types/leaflet": "^1.9.16",
