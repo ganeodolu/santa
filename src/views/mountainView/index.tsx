@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-
 import dynamic from "next/dynamic";
 import {
-  LineChart,
   ComposedChart,
   Line,
   Bar,
@@ -13,7 +11,6 @@ import {
   Legend,
   ResponsiveContainer
 } from "recharts";
-import dayjs from "dayjs";
 import {
   xyConvert,
   extractWeatherData,
@@ -22,10 +19,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { getWeatherInformation } from "@/views/api/weather";
 import type { Mountain } from "@/shared/constants";
-
-import CloudyIcon from "@/shared/ui/icons/cloudy.svg";
-import SunnyIcon from "@/shared/ui/icons/sunny.svg";
-import PartlyCloudyIcon from "@/shared/ui/icons/partlyCloudy.svg";
+import { formatXAxis, CustomizedDot, CustomTooltip } from "@/entities/chart/ui";
 
 const LeafletMapWithNoSSR = dynamic(
   () => import("@/entities/map/ui/LeafletMap"),
@@ -33,6 +27,7 @@ const LeafletMapWithNoSSR = dynamic(
     ssr: false
   }
 );
+
 type Props = {
   mountainData: Mountain;
 };
@@ -41,7 +36,6 @@ const MountainView = ({mountainData}: Props) => {
 const [isMounted, setIsMounted] = useState(false);
 const { name, lat, lon, height, peak, region } = mountainData;
 const { x, y } = xyConvert(lat, lon);
-console.log(x, y, typeof x, typeof y);
 const { data: weatherData } = useQuery({
   queryKey: ["weather", x, y, timeTransformWithBufferHour(0.5)],
   queryFn: async () =>
@@ -54,64 +48,6 @@ const { data: weatherData } = useQuery({
     ]).filter((_, idx) => idx % 3 === 0)
 });
 console.log(weatherData);
-
-const formatXAxis = (tickItem: number) => {
-  const time = dayjs(tickItem, "HH").format("HH시");
-  return time;
-};
-
-const CustomizedDot = (props) => {
-  const { cx, cy, payload } = props;
-  const weatherType = payload["SKY"];
-  const size = 25;
-
-  // 값에 따라 다른 SVG 패스 반환
-  const renderWeatherIcon = (weatherType) => {
-    switch (weatherType) {
-      case 1: // 맑음
-        return (
-          <g transform={`translate(${cx - size / 2},${cy - size / 2})`}>
-            <SunnyIcon width={size} height={size} />
-          </g>
-        );
-
-      case 3: // 구름 많음
-        return (
-          <g transform={`translate(${cx - size / 2},${cy - size / 2})`}>
-            <PartlyCloudyIcon width={size} height={size} />
-          </g>
-        );
-
-      case 4: // 흐림
-        return (
-          <g transform={`translate(${cx - size / 2},${cy - size / 2})`}>
-            <CloudyIcon width={size} height={size} />
-          </g>
-        );
-
-      default:
-        return null;
-    }
-  };
-
-  return renderWeatherIcon(weatherType);
-};
-
-const CustomTooltip = ({ active, payload }) => {
-  if (active && payload && payload.length) {
-    const formatTime = dayjs(payload[0].payload.timestamp, "MM-DD-HH").format(
-      "MM월 DD일 HH시"
-    );
-    return (
-      <div className="rounded border bg-white p-2 shadow">
-        {/* <p>{`시간 : ${payload[0].payload.timestamp}시`}</p> */}
-        <p>{`시간 : ${formatTime}`}</p>
-        <p>{`기온 : ${payload[0].value}°C`}</p>
-      </div>
-    );
-  }
-  return null;
-};
 
 useEffect(() => {
   setIsMounted(true);
@@ -159,23 +95,35 @@ useEffect(() => {
         <h2 className="mb-4 text-2xl font-bold">날씨</h2>
         <ResponsiveContainer width="100%" height={200}>
           <ComposedChart data={weatherData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="timestamp" tickFormatter={formatXAxis} />
+            <CartesianGrid
+              horizontal={true}
+              vertical={true}
+              strokeDasharray="3 3"
+            />
+            <XAxis dataKey="timestamp"
+              interval={1}
+              tickFormatter={formatXAxis} />
             <YAxis
               type="number"
               yAxisId="TMP"
-              domain={["dataMin - 15", "dataMax + 5"]}
-              unit="°C"
+              domain={["dataMin - 10", "dataMax + 2"]}
+              ticks={[-10, 0, 10]}
+              label={{ value: "°C", position: "insideTopLeft" }}
               orientation="left"
             />
-            <YAxis yAxisId="POP" domain={[0, 400]} orientation="right" />
+            <YAxis
+              yAxisId="POP"
+              domain={[0, 400]}
+              ticks={[0, 100]}
+              orientation="right"
+            />
             <Tooltip content={<CustomTooltip />} />
             <Legend />
             <Line
               yAxisId="TMP"
               type="monotone"
               dataKey="TMP"
-              stroke="#8884d8"
+              stroke="#ee1b1b"
               name="기온 (°C)"
               dot={<CustomizedDot />}
             />
@@ -183,7 +131,7 @@ useEffect(() => {
               yAxisId="POP"
               type="monotone"
               dataKey="POP"
-              stroke="#82ca9d"
+              fill="#3236a8"
               name="강수확률 (%)"
             />
             {/* <Bar
@@ -199,48 +147,6 @@ useEffect(() => {
               stroke="#ff7300"
               name="풍속 (m/s)"
             /> */}
-          </ComposedChart>
-        </ResponsiveContainer>
-        <ResponsiveContainer width="100%" height={200}>
-          <ComposedChart data={weatherData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="timestamp" tickFormatter={formatXAxis} />
-            {/* <YAxis
-              yAxisId="TMP"
-              domain={["dataMin - 2", "dataMax + 2"]}
-              orientation="left"
-            /> */}
-            <YAxis yAxisId="POP" domain={[0, 100]} orientation="right" />
-            <YAxis yAxisId="WSD" orientation="left" />
-            <Tooltip content={<CustomTooltip />} />
-            <Legend />
-            {/* <Line
-              yAxisId="TMP"
-              type="monotone"
-              dataKey="TMP"
-              stroke="#8884d8"
-              name="기온 (°C)"
-            /> */}
-            <Bar
-              yAxisId="POP"
-              type="monotone"
-              dataKey="POP"
-              stroke="#82ca9d"
-              name="강수확률 (%)"
-            />
-            {/* <Bar
-              yAxisId="right"
-              dataKey="precipitation"
-              fill="#ffc658"
-              name="강수량 (mm)"
-            /> */}
-            <Line
-              yAxisId="WSD"
-              type="monotone"
-              dataKey="WSD"
-              stroke="#ff7300"
-              name="풍속 (m/s)"
-            />
           </ComposedChart>
         </ResponsiveContainer>
       </section>
