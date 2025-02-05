@@ -1,30 +1,33 @@
-import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
-import {
-  ComposedChart,
-  Line,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer
-} from "recharts";
-import {
-  xyConvert,
-  extractWeatherData,
-  timeTransformWithBufferHour
-} from "@/shared/model";
-import { useQuery } from "@tanstack/react-query";
-import { getWeatherInformation } from "@/views/api/weather";
+import { CustomTooltip, CustomizedDot, formatXAxis } from "@/entities/chart/ui";
+import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import type { Mountain } from "@/shared/constants";
-import { formatXAxis, CustomizedDot, CustomTooltip } from "@/entities/chart/ui";
+import {
+  extractWeatherData,
+  timeTransformWithBufferHour,
+  xyConvert
+} from "@/shared/model";
+import { getWeatherInformation } from "@/views/api/weather";
+import { useQuery } from "@tanstack/react-query";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import {
+  Bar,
+  CartesianGrid,
+  ComposedChart,
+  Legend,
+  Line,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
+} from "recharts";
 
 const LeafletMapWithNoSSR = dynamic(
   () => import("@/entities/map/ui/LeafletMap"),
   {
-    ssr: false
+    ssr: false,
+    loading: () => <MapSkeleton />
   }
 );
 
@@ -32,29 +35,26 @@ type Props = {
   mountainData: Mountain;
 };
 
-const MountainView = ({mountainData}: Props) => {
-const [isMounted, setIsMounted] = useState(false);
-const { name, lat, lon, height, peak, region } = mountainData;
-const { x, y } = xyConvert(lat, lon);
-const { data: weatherData } = useQuery({
-  queryKey: ["weather", x, y, timeTransformWithBufferHour(0.5)],
-  queryFn: async () =>
-    extractWeatherData(await getWeatherInformation(x, y), [
-      "TMP",
-      "SKY",
-      "POP",
-      "WSD",
-      "PTY"
-    ]).filter((_, idx) => idx % 3 === 0)
-});
-console.log(weatherData);
+const MountainView = ({ mountainData }: Props) => {
+  const [isMounted, setIsMounted] = useState(false);
+  const { name, lat, lon, height, peak, region, pic } = mountainData;
+  const { x, y } = xyConvert(lat, lon);
+  const { data: weatherData } = useQuery({
+    queryKey: ["weather", x, y, timeTransformWithBufferHour(0.5)],
+    queryFn: async () =>
+      extractWeatherData(await getWeatherInformation(x, y), [
+        "TMP",
+        "SKY",
+        "POP",
+        "WSD",
+        "PTY"
+      ]).filter((_, idx) => idx % 3 === 0)
+  });
+  console.log(weatherData);
 
-useEffect(() => {
-  setIsMounted(true);
-}, []);
-
-// if (!mountainData) return <div>Loading...</div>;
-
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <article className="container mx-auto max-w-[500px] bg-white shadow-md">
@@ -68,10 +68,12 @@ useEffect(() => {
 
       <section className="mb-8 flex">
         <div className="w-1/2 pr-4">
-          <img
-            src="https://picsum.photos/200/200.webp"
+          <Image
+            className="rounded-lg shadow-lg"
+            src={pic}
             alt={name}
-            className="h-auto w-full rounded-lg shadow-lg"
+            width={234}
+            height={160}
           />
         </div>
         <div className="w-1/2 pl-4">
@@ -100,9 +102,11 @@ useEffect(() => {
               vertical={true}
               strokeDasharray="3 3"
             />
-            <XAxis dataKey="timestamp"
+            <XAxis
+              dataKey="timestamp"
               interval={0}
-              tickFormatter={formatXAxis} />
+              tickFormatter={formatXAxis}
+            />
             <YAxis
               type="number"
               yAxisId="TMP"
@@ -152,6 +156,6 @@ useEffect(() => {
       </section>
     </article>
   );
-}
+};
 
-export default MountainView
+export default MountainView;
