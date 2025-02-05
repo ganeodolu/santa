@@ -7,13 +7,15 @@ import SnowyIcon from "@/shared/ui/icons/snowy.svg";
 import ShowerIcon from "@/shared/ui/icons/shower.svg";
 
 export const formatXAxis = (tickItem: string) => {
-  const min = tickItem.slice(-4);
-  let time = dayjs(tickItem).format("H시");
-  if (min === "0000") {
-    time = dayjs(tickItem).format("M/D");
+  const hour = tickItem.slice(-4, -2);
+  if (hour === "00") {
+    return dayjs(tickItem).format("M/D");
+  }
+  if (hour === "06" || hour === "12" || hour === "18") {
+    return dayjs(tickItem).format("H시");
   }
   
-  return time;
+  return '';
 };
 
 type PayloadProps = {
@@ -120,7 +122,7 @@ export const CustomTooltip = ({
   payload: any;
 }) => {
   console.log(active, payload);
-  if (active && payload && payload.length) {
+  if (active && payload?.length) {
     const formatTime = dayjs(payload[0].payload.timestamp, "MM-DD-HH").format(
       "MM월 DD일 HH시"
     );

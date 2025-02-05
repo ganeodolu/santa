@@ -83,7 +83,7 @@ useEffect(() => {
             </span>
           </p>
           <p className="mb-2">
-            위치: <span className="font-semibold">{region}</span>
+            지역: <span className="font-semibold">{region}</span>
           </p>
           <p className="mb-2">
             최고봉: <span className="font-semibold">{peak}</span>
@@ -91,7 +91,7 @@ useEffect(() => {
         </div>
       </section>
 
-      <section className="overflow-x-scroll rounded-lg bg-white p-6 shadow-lg">
+      <section className="rounded-lg bg-white p-6 shadow-lg">
         <h2 className="mb-4 text-2xl font-bold">날씨</h2>
         <ResponsiveContainer width="100%" height={200}>
           <ComposedChart data={weatherData}>
@@ -101,7 +101,7 @@ useEffect(() => {
               strokeDasharray="3 3"
             />
             <XAxis dataKey="timestamp"
-              interval={1}
+              interval={0}
               tickFormatter={formatXAxis} />
             <YAxis
               type="number"
