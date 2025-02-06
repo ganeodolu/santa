@@ -1,7 +1,7 @@
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
 
 type Props = {
   name: string;
@@ -15,6 +15,7 @@ const LeafletMap = ({name, center, zoom}: Props) => {
     <MapContainer
       center={center}
       zoom={zoom}
+      zoomControl={false}
       scrollWheelZoom={true}
       style={{ width: "100%", height: "40vh" }}
     >
@@ -22,6 +23,7 @@ const LeafletMap = ({name, center, zoom}: Props) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <ZoomControl position="bottomright" />
       <Marker position={center}>
         <Popup>
           {name} <br />
