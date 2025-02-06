@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 
 export const useSearch = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [searchResults, setSearchResults] = useState<Mountain[]>([]);
+  const [searchResults, setSearchResults] = useState<Mountain[] | null>(null);
 
   const performSearch = (keyword: string, array: any[]) => {
     const results = array.filter(({ name }) => {
@@ -37,7 +37,7 @@ export const useSearch = () => {
     if (searchKeyword) {
       debouncedSearch(searchKeyword);
     } else {
-      setSearchResults([]);
+      setSearchResults(null);
     }
   }, [searchKeyword, debouncedSearch]);
 
