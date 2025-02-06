@@ -7,7 +7,7 @@ type SearchHeaderProps = {
 
 const SearchHeader = ({ onInputClick }: SearchHeaderProps) => (
   <BaseHeader>
-    <SearchInput value="" onChange={() => {}} onClick={onInputClick} />
+    <SearchInput value="" onChange={() => {}} onClick={onInputClick} isAutoFocused={false} />
   </BaseHeader>
 );
 

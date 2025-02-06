@@ -16,6 +16,7 @@ const SearchHeaderWithBack = ({
     <SearchInput
       value={searchKeyword}
       onChange={onChange}
+      isAutoFocused={true}
     />
   </BaseHeader>
 );
