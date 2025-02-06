@@ -49,7 +49,7 @@ const SearchResult = ({ searchResults }: Props) => {
         {searchResults.map(
           ({ name, englishName, height, peak, region, pic }) => (
             <li
-              key={peak}
+              key={englishName}
               className="mountain-information flex cursor-pointer items-center rounded p-2 hover:bg-gray-100"
               data-mountain-name={name}
               data-mountain-english-name={englishName}
