@@ -2,6 +2,7 @@ import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
+import MapBackButton from '@/entities/map/ui/MapBackButton';
 
 type Props = {
   name: string;
@@ -29,6 +30,7 @@ const LeafletMap = ({name, center, zoom}: Props) => {
           {name} <br />
         </Popup>
       </Marker>
+      <MapBackButton />
     </MapContainer>
   );
 };
