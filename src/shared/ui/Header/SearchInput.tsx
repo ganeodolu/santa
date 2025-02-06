@@ -10,7 +10,7 @@ const SearchInput = ({ value, onChange, onClick }: SearchInputProps) => (
       type="search"
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full cursor-pointer rounded-lg border border-gray-300 py-2 pr-4 pl-10 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      className="w-full cursor-text rounded-lg border border-gray-300 py-2 pr-4 pl-10 focus:ring-2 focus:ring-blue-500 focus:outline-none"
       placeholder="산 찾기"
       onClick={onClick}
     />
