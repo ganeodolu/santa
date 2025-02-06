@@ -121,7 +121,7 @@ const MountainView = ({ mountainData }: Props) => {
               ticks={[0, 100]}
               orientation="right"
             />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={CustomTooltip} />
             <Legend />
             <Line
               yAxisId="TMP"
@@ -129,7 +129,7 @@ const MountainView = ({ mountainData }: Props) => {
               dataKey="TMP"
               stroke="#ee1b1b"
               name="기온 (°C)"
-              dot={<CustomizedDot />}
+              dot={CustomizedDot}
             />
             <Bar
               yAxisId="POP"
