@@ -66,7 +66,7 @@ const MountainView = ({ mountainData }: Props) => {
       </section>
 
       <section className="mb-4 flex">
-        <div className="w-1/2 pr-4">
+        <div className="w-1/2 pr-4 pl-2">
           <Image
             className="rounded-lg shadow-lg"
             src={pic}
@@ -93,7 +93,7 @@ const MountainView = ({ mountainData }: Props) => {
       </section>
 
       <section className="mb-4 rounded-lg bg-white shadow-lg">
-        <h2 className="mb-4 text-2xl font-bold">날씨</h2>
+        <h2 className="mb-2 text-center text-2xl font-bold">날씨</h2>
         <ResponsiveContainer width="100%" height={200}>
           <ComposedChart data={weatherData}>
             <CartesianGrid

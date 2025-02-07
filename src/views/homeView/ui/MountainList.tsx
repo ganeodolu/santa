@@ -19,11 +19,11 @@ const MountainList = ({ mountainList }: Props) => {
               onClick={() => navigateTo(`/mountain/${englishName}`)}
             >
               <Image
-                className="h-[160px] rounded-lg object-cover shadow-lg"
+                className="h-[140px] rounded-lg object-cover shadow-lg"
                 src={pic}
                 alt={name}
                 width={234}
-                height={160}
+                height={140}
               />
               <div className="flex items-center gap-2 p-4">
                 <h3 className="text-lg font-bold">{name}</h3>
