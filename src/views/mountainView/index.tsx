@@ -57,7 +57,7 @@ const MountainView = ({ mountainData }: Props) => {
 
   return (
     <article className="container mx-auto max-w-[500px] bg-white shadow-md">
-      <section className="mb-8">
+      <section className="mb-4">
         {isMounted && (
           <div className="mx-auto">
             <LeafletMapWithNoSSR name={name} center={[lat, lon]} zoom={13} />
@@ -65,7 +65,7 @@ const MountainView = ({ mountainData }: Props) => {
         )}
       </section>
 
-      <section className="mb-8 flex">
+      <section className="mb-4 flex">
         <div className="w-1/2 pr-4">
           <Image
             className="rounded-lg shadow-lg"
@@ -92,7 +92,7 @@ const MountainView = ({ mountainData }: Props) => {
         </div>
       </section>
 
-      <section className="rounded-lg bg-white p-6 shadow-lg">
+      <section className="mb-4 rounded-lg bg-white shadow-lg">
         <h2 className="mb-4 text-2xl font-bold">날씨</h2>
         <ResponsiveContainer width="100%" height={200}>
           <ComposedChart data={weatherData}>
