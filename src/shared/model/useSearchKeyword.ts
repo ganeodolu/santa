@@ -21,7 +21,6 @@ export const useSearch = () => {
 
   const debouncedSearch = useCallback(
     debounce((keyword: string) => {
-      console.log("검색어:", keyword);
       const results = performSearch(keyword, MOUNTAIN_INFORMATION_LIST);
       setSearchResults(results);
     }, 500),

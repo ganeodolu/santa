@@ -50,7 +50,6 @@ const MountainView = ({ mountainData }: Props) => {
         "PTY"
       ]).filter((_, idx) => idx % 3 === 0)
   });
-  console.log(weatherData);
 
   useEffect(() => {
     setIsMounted(true);

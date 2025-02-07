@@ -3,7 +3,6 @@ import { apiWithWeather } from "./main";
 
 export const getWeatherInformation = async (x: number, y: number) => {
   const [base_date, base_time] = timeTransformWithBufferHour(0.5);
-  console.log(base_time)
   const response = await apiWithWeather({
     params: {
       serviceKey: process.env.NEXT_PUBLIC_WEATHER_API_KEY,
