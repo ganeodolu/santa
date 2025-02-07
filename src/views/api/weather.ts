@@ -6,7 +6,7 @@ export const getWeatherInformation = async (x: number, y: number) => {
   const response = await apiWithWeather({
     params: {
       serviceKey: process.env.NEXT_PUBLIC_WEATHER_API_KEY,
-      numOfRows: "600",
+      numOfRows: "300",
       pageNo: "1",
       base_date,
       base_time,
