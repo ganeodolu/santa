@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:image"
-          content="/images/ogImage.png"
+          content="/ogImage.png"
         />
       </Head>
       <QueryClientProvider client={queryClient}>
