@@ -24,15 +24,12 @@ export default function App({ Component, pageProps }: AppProps) {
           content="국립공원 산 정보를 알려주는 산타보아입니다."
         />
         <meta property="og:title" content="산타보아" />
-        <meta property="og:site_name" content="Santaboa" />
+        <meta property="og:site_name" content="SANTABOA" />
         <meta
           property="og:description"
           content="국립공원 산 정보를 알려주는 산타보아입니다."
         />
-        <meta
-          property="og:image"
-          content="/ogImage.png"
-        />
+        <meta property="og:image" content="/ogImage.png" />
       </Head>
       <QueryClientProvider client={queryClient}>
         <Provider>
