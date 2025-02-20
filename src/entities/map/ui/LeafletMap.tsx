@@ -8,9 +8,10 @@ type Props = {
   name: string;
   center: [number, number];
   zoom: number;
+  height: string;
 };
 
-const LeafletMap = ({name, center, zoom}: Props) => {
+const LeafletMap = ({name, center, height, zoom}: Props) => {
   
   return (
     <MapContainer
@@ -18,7 +19,7 @@ const LeafletMap = ({name, center, zoom}: Props) => {
       zoom={zoom}
       zoomControl={false}
       scrollWheelZoom={true}
-      style={{ width: "100%", height: "40vh" }}
+      style={{ width: "100%", height }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

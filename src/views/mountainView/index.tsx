@@ -60,7 +60,7 @@ const MountainView = ({ mountainData }: Props) => {
       <section className="mb-4">
         {isMounted && (
           <div className="mx-auto">
-            <LeafletMapWithNoSSR name={name} center={[lat, lon]} zoom={13} />
+            <LeafletMapWithNoSSR name={name} center={[lat, lon]} height={"40vh"} zoom={13} />
           </div>
         )}
       </section>
