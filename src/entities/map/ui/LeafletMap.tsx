@@ -5,7 +5,6 @@ import "leaflet/dist/leaflet.css";
 import {
   MapContainer,
   Marker,
-  Popup,
   Tooltip,
   TileLayer,
   ZoomControl
