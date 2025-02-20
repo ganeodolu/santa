@@ -135,6 +135,7 @@ const MountainView = ({ mountainData }: Props) => {
               stroke="#ee1b1b"
               name="기온 (°C)"
               dot={CustomizedDot}
+              animationDuration={0}
             />
             <Bar
               yAxisId="POP"
