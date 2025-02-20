@@ -33,7 +33,7 @@ const MountainMapView = (props: Props) => {
           <div className="mx-auto">
             <LeafletMapWithNoSSR
               markerNames={MOUNTAIN_NAMES}
-              center={[36.28, 127.92]}
+              center={[35.8, 127.7]}
               height={"90vh"}
               zoom={7}
               markerPositions={MOUNTAIN_INFORMATION_LIST.map(({ lat, lon }) => [
