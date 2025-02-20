@@ -6,6 +6,7 @@ import {
   MapContainer,
   Marker,
   Popup,
+  Tooltip,
   TileLayer,
   ZoomControl
 } from "react-leaflet";
@@ -40,14 +41,24 @@ const LeafletMap = ({
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <ZoomControl position="topright" />
-      <MarkerClusterGroup>
+      <MarkerClusterGroup maxClusterRadius={60}>
         {markerPositions.map(([lat, lon], idx) => {
           return (
             <Marker position={[lat, lon]} key={markerNames[idx]}>
-              <Popup>
-                {markerNames[idx]} <br />
-              </Popup>
-            </Marker>
+              <Tooltip
+                opacity={1}
+              offset={[-15, 28]}
+              key={markerNames[idx]}
+              direction="top"
+              permanent
+              interactive
+              className="rounded-lg border-0 bg-white p-2 shadow-lg"
+            >
+              <div className="text-gray-800">
+                <h3 className="text-lg font-semibold">{markerNames[idx]}</h3>
+              </div>
+            </Tooltip>
+          </Marker>
           );
         })}
       </MarkerClusterGroup>
