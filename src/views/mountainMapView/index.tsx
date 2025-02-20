@@ -1,8 +1,9 @@
-import { useNavigation } from "@/shared/model/useNavigation";
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
+import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
+import { MOUNTAIN_INFORMATION_LIST, MOUNTAIN_NAMES } from "@/shared/constants";
+import { useNavigation } from "@/shared/model/useNavigation";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
 
 const LeafletMapWithNoSSR = dynamic(
   () => import("@/entities/map/ui/LeafletMap"),
@@ -12,15 +13,15 @@ const LeafletMapWithNoSSR = dynamic(
   }
 );
 
-type Props = {}
+type Props = {};
 
 const MountainMapView = (props: Props) => {
   const { navigateTo } = useNavigation();
   const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-      setIsMounted(true);
-    }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <div className="mx-auto max-w-[500px] bg-white shadow-md">
@@ -31,16 +32,20 @@ const MountainMapView = (props: Props) => {
         {isMounted && (
           <div className="mx-auto">
             <LeafletMapWithNoSSR
-              name={"test"}
+              markerNames={MOUNTAIN_NAMES}
               center={[36.28, 127.92]}
               height={"90vh"}
               zoom={7}
+              markerPositions={MOUNTAIN_INFORMATION_LIST.map(({ lat, lon }) => [
+                lat,
+                lon
+              ])}
             />
           </div>
         )}
       </section>
     </div>
   );
-}
+};
 
-export default MountainMapView
+export default MountainMapView;

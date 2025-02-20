@@ -1,18 +1,32 @@
+import MapBackButton from "@/entities/map/ui/MapBackButton";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
-import MapBackButton from '@/entities/map/ui/MapBackButton';
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  ZoomControl
+} from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
+import "react-leaflet-markercluster/styles";
 
 type Props = {
-  name: string;
+  markerNames: string[];
   center: [number, number];
   zoom: number;
   height: string;
+  markerPositions: [number, number][];
 };
 
-const LeafletMap = ({name, center, height, zoom}: Props) => {
-  
+const LeafletMap = ({
+  markerNames,
+  center,
+  height,
+  zoom,
+  markerPositions
+}: Props) => {
   return (
     <MapContainer
       center={center}
@@ -25,12 +39,18 @@ const LeafletMap = ({name, center, height, zoom}: Props) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <ZoomControl position="bottomright" />
-      <Marker position={center}>
-        <Popup>
-          {name} <br />
-        </Popup>
-      </Marker>
+      <ZoomControl position="topright" />
+      <MarkerClusterGroup>
+        {markerPositions.map(([lat, lon], idx) => {
+          return (
+            <Marker position={[lat, lon]} key={markerNames[idx]}>
+              <Popup>
+                {markerNames[idx]} <br />
+              </Popup>
+            </Marker>
+          );
+        })}
+      </MarkerClusterGroup>
       <MapBackButton />
     </MapContainer>
   );
