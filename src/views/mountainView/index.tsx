@@ -66,6 +66,7 @@ const MountainView = ({ mountainData }: Props) => {
               zoom={13}
               markerNames={[name]}
               markerPositions={[[lat, lon]]}
+              isShowBackButton={true}
             />
           </div>
         )}

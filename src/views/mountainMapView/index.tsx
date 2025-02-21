@@ -40,6 +40,7 @@ const MountainMapView = (props: Props) => {
                 lat,
                 lon
               ])}
+              isShowBackButton={false}
             />
           </div>
         )}

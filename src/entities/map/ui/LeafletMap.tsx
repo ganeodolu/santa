@@ -18,6 +18,7 @@ type Props = {
   zoom: number;
   height: string;
   markerPositions: [number, number][];
+  isShowBackButton: boolean;
 };
 
 const LeafletMap = ({
@@ -25,7 +26,8 @@ const LeafletMap = ({
   center,
   height,
   zoom,
-  markerPositions
+  markerPositions,
+  isShowBackButton
 }: Props) => {
   return (
     <MapContainer
@@ -46,22 +48,22 @@ const LeafletMap = ({
             <Marker position={[lat, lon]} key={markerNames[idx]}>
               <Tooltip
                 opacity={1}
-              offset={[-15, 28]}
-              key={markerNames[idx]}
-              direction="top"
-              permanent
-              interactive
-              className="rounded-lg border-0 bg-white p-2 shadow-lg"
-            >
-              <div className="text-gray-800">
-                <h3 className="text-lg font-semibold">{markerNames[idx]}</h3>
-              </div>
-            </Tooltip>
-          </Marker>
+                offset={[-15, 28]}
+                key={markerNames[idx]}
+                direction="top"
+                permanent
+                interactive
+                className="rounded-lg border-0 bg-white p-2 shadow-lg"
+              >
+                <div className="text-gray-800">
+                  <h3 className="text-lg font-semibold">{markerNames[idx]}</h3>
+                </div>
+              </Tooltip>
+            </Marker>
           );
         })}
       </MarkerClusterGroup>
-      <MapBackButton />
+      {isShowBackButton && <MapBackButton />}
     </MapContainer>
   );
 };
