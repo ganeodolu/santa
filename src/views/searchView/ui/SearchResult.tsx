@@ -47,7 +47,7 @@ const SearchResult = ({ searchResults }: Props) => {
       <h2 className="mb-2 text-lg font-semibold">검색 결과</h2>
       <ul className="space-y-2" onClick={handleResultClick}>
         {searchResults.map(
-          ({ name, englishName, height, peak, region, pic }) => (
+          ({ name, englishName, height, peak, region, imageSrc }) => (
             <li
               key={englishName}
               className="mountain-information flex cursor-pointer items-center rounded p-2 hover:bg-gray-100"
@@ -56,7 +56,7 @@ const SearchResult = ({ searchResults }: Props) => {
             >
               <Image
                 className="mr-4 h-[60px] w-[60px] rounded-lg object-cover shadow-lg"
-                src={pic}
+                src={imageSrc}
                 alt={name}
                 width={60}
                 height={60}
