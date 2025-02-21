@@ -37,7 +37,7 @@ type Props = {
 
 const MountainView = ({ mountainData }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
-  const { name, lat, lon, height, peak, region, pic } = mountainData;
+  const { name, lat, lon, height, peak, region, imageSrc } = mountainData;
   const { x, y } = xyConvert(lat, lon);
   const { data: weatherData } = useQuery({
     queryKey: ["weather", x, y, timeTransformWithBufferHour(0.5)],
@@ -76,7 +76,7 @@ const MountainView = ({ mountainData }: Props) => {
         <div className="w-1/2 pr-4 pl-2">
           <Image
             className="rounded-lg shadow-lg"
-            src={pic}
+            src={imageSrc}
             alt={name}
             width={234}
             height={160}

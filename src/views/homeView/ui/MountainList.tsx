@@ -12,7 +12,7 @@ const MountainList = ({ mountainList }: Props) => {
   return (
     <section className="container mx-auto px-4 py-8">
       <div className="-mx-2 flex flex-wrap">
-        {mountainList.map(({ name, englishName, region, pic }) => (
+        {mountainList.map(({ name, englishName, region, imageSrc }) => (
           <div key={englishName} className="mb-4 w-1/2 px-2">
             <div
               className="cursor-pointer overflow-hidden rounded-lg bg-white shadow-md"
@@ -20,7 +20,7 @@ const MountainList = ({ mountainList }: Props) => {
             >
               <Image
                 className="h-[140px] rounded-lg object-cover shadow-lg"
-                src={pic}
+                src={imageSrc}
                 alt={name}
                 width={234}
                 height={140}
