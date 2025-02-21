@@ -37,7 +37,7 @@ type Props = {
 
 const MountainView = ({ mountainData }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
-  const { name, lat, lon, height, peak, region, imageSrc } = mountainData;
+  const { name, lat, lon, height, peak, region, imageSrc, englishName } = mountainData;
   const { x, y } = xyConvert(lat, lon);
   const { data: weatherData } = useQuery({
     queryKey: ["weather", x, y, timeTransformWithBufferHour(0.5)],
@@ -65,6 +65,7 @@ const MountainView = ({ mountainData }: Props) => {
               height={"40vh"}
               zoom={13}
               markerNames={[name]}
+              markerEnglishNames={[englishName]}
               markerPositions={[[lat, lon]]}
               isShowBackButton={true}
             />

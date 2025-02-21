@@ -2,6 +2,7 @@ import MapBackButton from "@/entities/map/ui/MapBackButton";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
+import { MouseEvent } from "react";
 import {
   MapContainer,
   Marker,
@@ -14,20 +15,24 @@ import "react-leaflet-markercluster/styles";
 
 type Props = {
   markerNames: string[];
+  markerEnglishNames: string[];
   center: [number, number];
   zoom: number;
   height: string;
   markerPositions: [number, number][];
   isShowBackButton: boolean;
+  handleTooltipClick?: (e: MouseEvent<HTMLElement>) => void;
 };
 
 const LeafletMap = ({
   markerNames,
+  markerEnglishNames,
   center,
   height,
   zoom,
   markerPositions,
-  isShowBackButton
+  isShowBackButton,
+  handleTooltipClick
 }: Props) => {
   return (
     <MapContainer
@@ -45,18 +50,22 @@ const LeafletMap = ({
       <MarkerClusterGroup maxClusterRadius={60}>
         {markerPositions.map(([lat, lon], idx) => {
           return (
-            <Marker position={[lat, lon]} key={markerNames[idx]}>
+            <Marker position={[lat, lon]} key={markerEnglishNames[idx]}>
               <Tooltip
                 opacity={1}
                 offset={[-15, 28]}
-                key={markerNames[idx]}
                 direction="top"
                 permanent
                 interactive
                 className="rounded-lg border-0 bg-white p-2 shadow-lg"
               >
-                <div className="text-gray-800">
-                  <h3 className="text-lg font-semibold">{markerNames[idx]}</h3>
+                <div className="text-gray-800" onClick={handleTooltipClick}>
+                  <h3
+                    className="mountain-name text-lg font-semibold"
+                    data-mountain-english-name={markerEnglishNames[idx]}
+                  >
+                    {markerNames[idx]}
+                  </h3>
                 </div>
               </Tooltip>
             </Marker>
