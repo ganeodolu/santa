@@ -1,20 +1,18 @@
+import BackButton from "@/shared/ui/Header/BackButton";
 import BaseHeader from "@/shared/ui/Header/BaseHeader";
 import SearchInput from "@/shared/ui/Header/SearchInput";
-import BackButton from "@/shared/ui/Header/BackButton";
+import Link from "next/link";
 
-type SearchHeaderProps = {
-  onInputClick: () => void;
+type Props = {
+  href: string;
 };
 
-const SearchHeaderWithBackNoFunction = ({ onInputClick }: SearchHeaderProps) => (
+const SearchHeaderWithBackNoFunction = ({ href }: Props) => (
   <BaseHeader>
     <BackButton />
-    <SearchInput
-      value=""
-      onChange={() => {}}
-      onClick={onInputClick}
-      isAutoFocused={false}
-    />
+    <Link href={href}>
+      <SearchInput isAutoFocused={false} />
+    </Link>
   </BaseHeader>
 );
 

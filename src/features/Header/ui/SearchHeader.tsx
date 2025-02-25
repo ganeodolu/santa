@@ -1,13 +1,16 @@
 import BaseHeader from "@/shared/ui/Header/BaseHeader";
 import SearchInput from "@/shared/ui/Header/SearchInput";
+import Link from "next/link";
 
-type SearchHeaderProps = {
-  onInputClick: () => void;
+type Props = {
+  href: string;
 };
 
-const SearchHeader = ({ onInputClick }: SearchHeaderProps) => (
+const SearchHeader = ({ href }: Props) => (
   <BaseHeader>
-    <SearchInput value="" onChange={() => {}} onClick={onInputClick} isAutoFocused={false} />
+    <Link href={href}>
+      <SearchInput isAutoFocused={false} />
+    </Link>
   </BaseHeader>
 );
 

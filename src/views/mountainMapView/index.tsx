@@ -2,7 +2,6 @@ import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
 import type { Mountain } from "@/shared/constants";
 import { MOUNTAIN_INFORMATION_LIST, MOUNTAIN_NAMES, MOUNTAIN_KEYS, MOUNTAIN_INFORMATION } from "@/shared/constants";
-import { useNavigation } from "@/shared/model/useNavigation";
 import dynamic from "next/dynamic";
 import { MouseEvent, useEffect, useState } from "react";
 import MountainInfoBar from "./ui/MountainInfoBar";
@@ -15,10 +14,7 @@ const LeafletMapWithNoSSR = dynamic(
   }
 );
 
-type Props = {};
-
-const MountainMapView = (props: Props) => {
-  const { navigateTo } = useNavigation();
+const MountainMapView = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   const [mountainInfo, setMountainInfo] = useState<Mountain | null>(null);
@@ -41,7 +37,7 @@ const MountainMapView = (props: Props) => {
   return (
     <div className="mx-auto max-w-[500px] bg-white shadow-md">
       <SearchHeaderWithBackNoFunction
-        onInputClick={() => navigateTo("/search")}
+        href={"/search"}
       />
       <section className="mb-4">
         {isMounted && (

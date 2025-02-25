@@ -1,18 +1,18 @@
-import Image from "next/image";
 import type { Mountain } from "@/shared/constants";
-import { useNavigation } from "@/shared/model/useNavigation";
+import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   mountainInfo: Mountain;
 };
 
-const MountainInfoBar = ({ mountainInfo: { name, englishName, imageSrc, region, height } }: Props) => {
-  const { navigateTo } = useNavigation();
-  
+const MountainInfoBar = ({
+  mountainInfo: { name, englishName, imageSrc, region, height }
+}: Props) => {
   return (
-    <section 
+    <Link
       className="fixed right-0 bottom-0 left-0 z-[1000] mx-auto flex h-30 max-w-[500px] items-center bg-white p-4 shadow-lg"
-      onClick={() => navigateTo(`/mountain/${englishName}`)}
+      href={`/mountain/${englishName}`}
     >
       <div className="relative mr-4 h-[100px] w-[200px] overflow-hidden">
         <Image
@@ -27,8 +27,8 @@ const MountainInfoBar = ({ mountainInfo: { name, englishName, imageSrc, region, 
         <p className="text-gray-600">{region}</p>
         <p className="text-gray-600"> {height.toLocaleString("en-US")}m</p>
       </div>
-    </section>
+    </Link>
   );
-}
+};
 
-export default MountainInfoBar
+export default MountainInfoBar;
