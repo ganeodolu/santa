@@ -8,7 +8,7 @@ type Props = {
 
 const SearchHeader = ({ href }: Props) => (
   <BaseHeader>
-    <Link href={href}>
+    <Link href={href} className="w-full">
       <SearchInput isAutoFocused={false} />
     </Link>
   </BaseHeader>

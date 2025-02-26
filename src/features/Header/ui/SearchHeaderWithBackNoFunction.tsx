@@ -10,7 +10,7 @@ type Props = {
 const SearchHeaderWithBackNoFunction = ({ href }: Props) => (
   <BaseHeader>
     <BackButton />
-    <Link href={href}>
+    <Link href={href} className="w-full">
       <SearchInput isAutoFocused={false} />
     </Link>
   </BaseHeader>
