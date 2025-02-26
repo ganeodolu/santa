@@ -13,7 +13,7 @@ const MountainList = ({ mountainList }: Props) => {
         {mountainList.map(({ name, englishName, region, imageSrc }) => (
           <div key={englishName} className="mb-4 w-1/2 px-2">
             <Link
-              className="cursor-pointer overflow-hidden rounded-lg bg-white shadow-md"
+              className="overflow-hidden rounded-lg bg-white shadow-md"
               href={`/mountain/${englishName}`}
             >
               <Image

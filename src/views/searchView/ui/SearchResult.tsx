@@ -43,7 +43,7 @@ const SearchResult = ({ searchResults }: Props) => {
           ({ name, englishName, height, peak, region, imageSrc }) => (
             <Link
               key={englishName}
-              className="mountain-information flex cursor-pointer items-center rounded p-2 hover:bg-gray-100"
+              className="mountain-information flex items-center rounded p-2 hover:bg-gray-100"
               data-mountain-name={name}
               href={`/mountain/${englishName}`}
             >
