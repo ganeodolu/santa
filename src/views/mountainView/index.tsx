@@ -126,6 +126,8 @@ const MountainView = ({ mountainData }: Props) => {
               yAxisId="POP"
               domain={[0, 400]}
               ticks={[0, 100]}
+              tick={{ fill: "#3236a8" }}
+              label={{ value: "%", position: "insideTopLeft" }}
               orientation="right"
             />
             <Tooltip content={CustomTooltip} />
