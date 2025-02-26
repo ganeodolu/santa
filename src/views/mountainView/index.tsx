@@ -7,6 +7,7 @@ import {
   xyConvert
 } from "@/shared/model";
 import { getWeatherInformation } from "@/views/api/weather";
+import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
 import { useQuery } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -37,7 +38,8 @@ type Props = {
 
 const MountainView = ({ mountainData }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
-  const { name, lat, lon, height, peak, region, imageSrc, englishName } = mountainData;
+  const { name, lat, lon, height, peak, region, imageSrc, englishName, cctv } =
+    mountainData;
   const { x, y } = xyConvert(lat, lon);
   const { data: weatherData } = useQuery({
     queryKey: ["weather", x, y, timeTransformWithBufferHour(0.5)],
@@ -100,7 +102,7 @@ const MountainView = ({ mountainData }: Props) => {
         </div>
       </section>
 
-      <section className="mb-4 rounded-lg bg-white shadow-lg">
+      <section className="mb-4 rounded-lg bg-white">
         <h2 className="mb-2 text-center text-2xl font-bold">날씨</h2>
         <ResponsiveContainer width="100%" height={200}>
           <ComposedChart data={weatherData}>
@@ -164,6 +166,7 @@ const MountainView = ({ mountainData }: Props) => {
           </ComposedChart>
         </ResponsiveContainer>
       </section>
+      <CCTVExternalLink cctv={cctv} />
     </article>
   );
 };
