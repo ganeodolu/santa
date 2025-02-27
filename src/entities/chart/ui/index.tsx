@@ -126,7 +126,6 @@ export const CustomizedDot = (props: CustomizedDotProps) => {
 
 export const CustomTooltip = (props: TooltipProps<number, string>) => {
   const { active, payload } = props;
-
   if (active && payload?.length) {
     const formatTime = dayjs(payload[0].payload.timestamp, "MM-DD-HH").format(
       "MM월 DD일 HH시"
@@ -140,4 +139,30 @@ export const CustomTooltip = (props: TooltipProps<number, string>) => {
     );
   }
   return <></>;
+};
+
+export type weatherDataProps = {
+  timestamp: string;
+  TMP: number;
+  SKY: number;
+  POP: number;
+  PTY: number;
+};
+
+export const generateYAxisTicks = (
+  data: weatherDataProps[],
+  dataType: keyof weatherDataProps,
+  offsetMin: number,
+  offsetMax: number
+) => {
+  const max = Math.max(...data.map((item) => item[dataType] as number));
+  const min = Math.min(...data.map((item) => item[dataType] as number));
+  const ticks = [];
+  for (let i = min + offsetMin; i <= max + offsetMax; i++) {
+    if (i % 5 === 0) {
+      ticks.push(i);
+    }
+  }
+
+  return ticks;
 };

@@ -1,4 +1,10 @@
-import { CustomTooltip, CustomizedDot, formatXAxis } from "@/entities/chart/ui";
+import {
+  CustomTooltip,
+  CustomizedDot,
+  formatXAxis,
+  generateYAxisTicks
+} from "@/entities/chart/ui";
+import type { weatherDataProps } from "@/entities/chart/ui";
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import type { Mountain } from "@/shared/constants";
 import {
@@ -48,7 +54,7 @@ const MountainView = ({ mountainData }: Props) => {
         "TMP",
         "SKY",
         "POP",
-        "WSD",
+        // "WSD",
         "PTY"
       ]).filter((_, idx) => idx % 3 === 0)
   });
@@ -97,12 +103,12 @@ const MountainView = ({ mountainData }: Props) => {
             지역: <span className="font-semibold">{region}</span>
           </p>
           <p className="mb-2">
-            최고봉: <span className="font-semibold">{peak}</span>
+            주요봉: <span className="font-semibold">{peak}</span>
           </p>
         </div>
       </section>
 
-      <section className="mb-4 rounded-lg bg-white">
+      {weatherData && <section className="mb-4 rounded-lg bg-white">
         <h2 className="mb-2 text-center text-2xl font-bold">날씨</h2>
         <ResponsiveContainer width="100%" height={200}>
           <ComposedChart data={weatherData}>
@@ -120,7 +126,13 @@ const MountainView = ({ mountainData }: Props) => {
               type="number"
               yAxisId="TMP"
               domain={["dataMin - 10", "dataMax + 2"]}
-              ticks={[-10, 0, 10]}
+              ticks={generateYAxisTicks(
+                weatherData as weatherDataProps[],
+                "TMP",
+                -5,
+                2
+              )}
+              tick={{ fill: "#ee1b1b" }}
               label={{ value: "°C", position: "insideTopLeft" }}
               orientation="left"
             />
@@ -166,6 +178,7 @@ const MountainView = ({ mountainData }: Props) => {
           </ComposedChart>
         </ResponsiveContainer>
       </section>
+      }
       <CCTVExternalLink cctv={cctv} />
     </article>
   );
