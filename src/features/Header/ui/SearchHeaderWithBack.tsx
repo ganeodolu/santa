@@ -1,5 +1,6 @@
 import BackButton from "@/shared/ui/Header/BackButton";
 import BaseHeader from "@/shared/ui/Header/BaseHeader";
+import HomeButton from "@/shared/ui/Header/HomeButton";
 import SearchInput from "@/shared/ui/Header/SearchInput";
 
 type SearchHeaderWithBackProps = {
@@ -13,6 +14,7 @@ const SearchHeaderWithBack = ({
 }: SearchHeaderWithBackProps) => (
   <BaseHeader>
     <BackButton />
+    <HomeButton href={"/"} />
     <SearchInput
       value={searchKeyword}
       onChange={onChange}
