@@ -26,7 +26,7 @@ const RecentKeyword = () => {
               {keyword}
             </Link>
             <button
-              className="mr-2 text-lg font-bold text-gray-400 hover:text-gray-800"
+              className="pb-1 mr-2 text-lg font-bold text-gray-400 hover:text-gray-800"
               aria-label="검색어 삭제"
               onClick={() => removeKeyword(keyword)}
             >

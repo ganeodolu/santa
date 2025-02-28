@@ -3,9 +3,7 @@ import { useSearch } from "@/shared/model/useSearchKeyword";
 import RecentKeyword from "@/views/searchView/ui/RecentKeyword";
 import SearchResult from "@/views/searchView/ui/SearchResult";
 
-type Props = {};
-
-const SearchView = (props: Props) => {
+const SearchView = () => {
   const { searchKeyword, searchResults, handleChange } = useSearch();
 
   return (
