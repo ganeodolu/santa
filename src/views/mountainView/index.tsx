@@ -1,20 +1,20 @@
+import type { weatherDataProps } from "@/entities/chart/ui";
 import {
   CustomTooltip,
   CustomizedDot,
   formatXAxis,
   generateYAxisTicks
 } from "@/entities/chart/ui";
-import type { weatherDataProps } from "@/entities/chart/ui";
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
-import type { Mountain } from "@/shared/constants";
 import {
-  extractWeatherData,
-  timeTransformWithBufferHour,
-  xyConvert
-} from "@/shared/model";
-import { getWeatherInformation } from "@/views/api/weather";
+  getAstronomyInformation,
+  getWeatherInformation
+} from "@/shared/api/client";
+import type { Mountain } from "@/shared/constants";
+import { timeTransformWithBufferHour, xyConvert } from "@/shared/model";
 import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
-import { useQuery } from "@tanstack/react-query";
+import { useQueries } from "@tanstack/react-query";
+import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -44,19 +44,47 @@ type Props = {
 
 const MountainView = ({ mountainData }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
-  const { name, lat, lon, height, peak, region, imageSrc, englishName, cctv, introduction } =
-    mountainData;
+  const {
+    name,
+    lat,
+    lon,
+    height,
+    peak,
+    region,
+    imageSrc,
+    englishName,
+    cctv,
+    introduction
+  } = mountainData;
+
   const { x, y } = xyConvert(lat, lon);
-  const { data: weatherData } = useQuery({
-    queryKey: ["weather", x, y, timeTransformWithBufferHour(0.5)],
-    queryFn: async () =>
-      extractWeatherData(await getWeatherInformation(x, y), [
-        "TMP",
-        "SKY",
-        "POP",
-        // "WSD",
-        "PTY"
-      ]).filter((_, idx) => idx % 3 === 0)
+
+  const [
+    {
+      data: weatherData,
+      isError: isWeatherDataError,
+      isLoading: isWeatherDataLoading,
+      error: weatherDataError
+    },
+    {
+      data: astronomyData,
+      isError: isAstronomyDataError,
+      isLoading: isAstronomyDataLoading,
+      error: astronomyDataError
+    }
+  ] = useQueries({
+    queries: [
+      {
+        queryKey: ["getWeather", x, y, timeTransformWithBufferHour(0.5)],
+        queryFn: () => getWeatherInformation(x, y),
+        retry: 1
+      },
+      {
+        queryKey: ["getAstronomy", lon, lat, dayjs().format("YYYYMMDD")],
+        queryFn: () => getAstronomyInformation(lat, lon),
+        retry: 1
+      }
+    ]
   });
 
   useEffect(() => {
@@ -107,7 +135,7 @@ const MountainView = ({ mountainData }: Props) => {
           </p>
         </div>
       </section>
-      <section className="ml-2 mr-2">
+      <section className="mr-2 ml-2">
         <h3 className="text-justify text-sm">{introduction}</h3>
       </section>
 
@@ -181,6 +209,37 @@ const MountainView = ({ mountainData }: Props) => {
             /> */}
             </ComposedChart>
           </ResponsiveContainer>
+          {/* <ResponsiveContainer width="100%" height={100}>
+            <ComposedChart data={weatherData}>
+              <CartesianGrid
+                horizontal={true}
+                vertical={true}
+                strokeDasharray="3 3"
+              />
+              <XAxis
+                dataKey="timestamp"
+                interval={0}
+                tickFormatter={formatXAxis}
+              />
+              <YAxis
+                yAxisId="POP"
+                domain={[0, 100]}
+                ticks={[0, 50, 100]}
+                tick={{ fill: "#3236a8" }}
+                label={{ value: "%", position: "outsideTopLeft" }}
+                orientation="left"
+              />
+              <YAxis yAxisId="right" orientation="right" />
+              <Legend />
+              <Bar
+                yAxisId="POP"
+                type="monotone"
+                dataKey="POP"
+                fill="#3236a8"
+                name="강수확률 (%)"
+              />
+            </ComposedChart>
+          </ResponsiveContainer> */}
         </section>
       )}
       <CCTVExternalLink cctv={cctv} />
