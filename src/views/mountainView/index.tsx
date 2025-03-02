@@ -13,6 +13,7 @@ import {
 import type { Mountain } from "@/shared/constants";
 import { timeTransformWithBufferHour, xyConvert } from "@/shared/model";
 import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
+import AstronomyInfoCard from "@/views/mountainView/ui/AstronomyInfoCard";
 import { useQueries } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import dynamic from "next/dynamic";
@@ -241,7 +242,9 @@ const MountainView = ({ mountainData }: Props) => {
             </ComposedChart>
           </ResponsiveContainer> */}
         </section>
-      )}
+      )}  
+      {astronomyData && <AstronomyInfoCard astronomyData={astronomyData} />}
+
       <CCTVExternalLink cctv={cctv} />
     </article>
   );
