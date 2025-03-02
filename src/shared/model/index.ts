@@ -97,12 +97,15 @@ type ExtractedWeather = {
   [key: string]: string | number;
 };
 
-export const extractWeatherData = (
+type ExtractWeatherData = (
   data: Weather[],
   weatherTypeArray: string[]
-// ): [string, ExtractedWeather[]] => {
-): ExtractedWeather[] => {
-  // const [{ baseDate, baseTime }] = data;
+) => ExtractedWeather[];
+
+export const extractWeatherData: ExtractWeatherData = (
+  data,
+  weatherTypeArray
+) => {
   const extractedWeatherData: ExtractedWeather[] = [];
 
   const lastWeatherData = data.reduce(
@@ -110,7 +113,7 @@ export const extractWeatherData = (
       acc: ExtractedWeather | null,
       { category, fcstDate, fcstTime, fcstValue }
     ) => {
-      const currentDateTime = (fcstDate + fcstTime);
+      const currentDateTime = fcstDate + fcstTime;
 
       if (!acc || acc.timestamp !== currentDateTime) {
         if (acc) extractedWeatherData.push(acc);
@@ -130,8 +133,5 @@ export const extractWeatherData = (
     extractedWeatherData.push(lastWeatherData);
   }
 
-  // return [baseDate + baseTime, extractedWeatherData];
-  return extractedWeatherData
+  return extractedWeatherData;
 };
-
-

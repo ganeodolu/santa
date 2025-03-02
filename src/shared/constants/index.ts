@@ -1,3 +1,15 @@
+export const BASE_URL = "https://apis.data.go.kr";
+
+export const WEATHER_ENDPOINT = "/1360000/VilageFcstInfoService_2.0/getVilageFcst";
+
+export const ASTRONOMY_ENDPOINT = "/B090041/openapi/service/RiseSetInfoService/getLCRiseSetInfo"
+
+export const NEXT_BASE_URL = "/api";
+
+export const NEXT_WEATHER_ENDPOINT = "/weather";
+
+export const NEXT_ASTRONOMY_ENDPOINT = "/astronomy";
+
 export const MOUNTAIN_NAMES = [
   "가야산",
   "계룡산",

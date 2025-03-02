@@ -1,4 +1,5 @@
-import { apiWithAstronomy } from "@/views/mountainView/api";
+import { ASTRONOMY_ENDPOINT } from "@/shared/constants";
+import { apiWithOpenAPI } from "@/shared/api/next";
 import dayjs from "dayjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -13,7 +14,7 @@ export default async function astronomyHandler(
 ) {
   try {
     const { lat, lon } = req.query;
-    const response = await apiWithAstronomy({
+    const response = await apiWithOpenAPI(ASTRONOMY_ENDPOINT,{
       params: {
         ServiceKey: process.env.NEXT_PUBLIC_ASTRONOMY_API_KEY,
         latitude: lat,

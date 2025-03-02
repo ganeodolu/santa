@@ -1,8 +1,9 @@
+import { WEATHER_ENDPOINT } from "@/shared/constants";
 import {
   extractWeatherData,
   timeTransformWithBufferHour
 } from "@/shared/model";
-import { apiWithWeather } from "@/views/mountainView/api";
+import { apiWithOpenAPI } from "@/shared/api/next";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function weatherHandler(
@@ -12,7 +13,7 @@ export default async function weatherHandler(
   try {
     const { gridX, gridY } = req.query;
     const [base_date, base_time] = timeTransformWithBufferHour(0.5);
-    const response = await apiWithWeather({
+    const response = await apiWithOpenAPI(WEATHER_ENDPOINT,{
       params: {
         serviceKey: process.env.NEXT_PUBLIC_WEATHER_API_KEY,
         numOfRows: "300",
