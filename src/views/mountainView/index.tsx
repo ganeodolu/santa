@@ -109,18 +109,18 @@ const MountainView = ({ mountainData }: Props) => {
           </div>
         )}
       </section>
-
-      <section className="mb-2 flex">
-        <div className="h-[140px] w-[220px] overflow-hidden pr-4 pl-2">
+      <section className="mb-4 flex">
+        <div className="w-[240px] overflow-hidden pr-4 pl-4">
           <Image
-            className="rounded-lg"
+            className="h-[140px] rounded-lg object-cover"
             src={imageSrc}
             alt={name}
-            width={200}
+            width={196}
             height={140}
           />
         </div>
-        <div className="w-1/2 pl-4">
+
+        <div className="flex w-1/3 flex-col justify-center pl-4">
           <h1 className="mb-2 text-2xl font-bold">{name}</h1>
           <p className="mb-1">
             높이:{" "}
@@ -136,8 +136,8 @@ const MountainView = ({ mountainData }: Props) => {
           </p>
         </div>
       </section>
-      <section className="mr-2 ml-2">
-        <h3 className="text-justify text-sm">{introduction}</h3>
+      <section className="m-2">
+        <h3 className="text-justify text-sm pl-2 pr-2">{introduction}</h3>
       </section>
 
       {weatherData && (
@@ -242,7 +242,7 @@ const MountainView = ({ mountainData }: Props) => {
             </ComposedChart>
           </ResponsiveContainer> */}
         </section>
-      )}  
+      )}
       {astronomyData && <AstronomyInfoCard astronomyData={astronomyData} />}
 
       <CCTVExternalLink cctv={cctv} />
