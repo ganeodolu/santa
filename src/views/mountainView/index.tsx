@@ -19,6 +19,8 @@ import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import {
   Bar,
   CartesianGrid,
@@ -139,10 +141,11 @@ const MountainView = ({ mountainData }: Props) => {
       <section className="m-2">
         <h3 className="pr-2 pl-2 text-justify text-sm">{introduction}</h3>
       </section>
-
-      {weatherData && (
-        <section className="mb-4 rounded-lg bg-white">
-          <h2 className="mb-2 text-center text-2xl font-bold">날씨</h2>
+      <section className="mb-4 rounded-lg bg-white">
+        <h2 className="mb-2 text-center text-2xl font-bold">날씨</h2>
+        {isWeatherDataLoading ? (
+          <Skeleton height={200} />
+        ) : (
           <ResponsiveContainer width="100%" height={200}>
             <ComposedChart data={weatherData}>
               <CartesianGrid
@@ -210,40 +213,13 @@ const MountainView = ({ mountainData }: Props) => {
             /> */}
             </ComposedChart>
           </ResponsiveContainer>
-          {/* <ResponsiveContainer width="100%" height={100}>
-            <ComposedChart data={weatherData}>
-              <CartesianGrid
-                horizontal={true}
-                vertical={true}
-                strokeDasharray="3 3"
-              />
-              <XAxis
-                dataKey="timestamp"
-                interval={0}
-                tickFormatter={formatXAxis}
-              />
-              <YAxis
-                yAxisId="POP"
-                domain={[0, 100]}
-                ticks={[0, 50, 100]}
-                tick={{ fill: "#3236a8" }}
-                label={{ value: "%", position: "outsideTopLeft" }}
-                orientation="left"
-              />
-              <YAxis yAxisId="right" orientation="right" />
-              <Legend />
-              <Bar
-                yAxisId="POP"
-                type="monotone"
-                dataKey="POP"
-                fill="#3236a8"
-                name="강수확률 (%)"
-              />
-            </ComposedChart>
-          </ResponsiveContainer> */}
-        </section>
+        )}
+      </section>
+      {isAstronomyDataLoading ? (
+        <Skeleton height={56} />
+      ) : (
+        <AstronomyInfoCard astronomyData={astronomyData} />
       )}
-      {astronomyData && <AstronomyInfoCard astronomyData={astronomyData} />}
 
       <CCTVExternalLink cctv={cctv} />
     </article>
