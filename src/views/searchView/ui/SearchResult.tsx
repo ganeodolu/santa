@@ -38,28 +38,34 @@ const SearchResult = ({ searchResults }: Props) => {
   return (
     <div className="p-4">
       <h2 className="mb-2 text-lg font-semibold">검색 결과</h2>
-      <ul className="space-y-2" onClick={handleResultClick}>
+      <ul className="flex flex-col gap-y-2" onClick={handleResultClick}>
         {searchResults.map(
           ({ name, englishName, height, peak, region, imageSrc }) => (
             <Link
               key={englishName}
-              className="mountain-information flex items-center rounded p-2 hover:bg-gray-100"
+              className="mountain-information rounded"
               data-mountain-name={name}
               href={`/mountain/${englishName}`}
             >
-              <Image
-                className="mr-4 h-[60px] w-[60px] rounded-lg object-cover shadow-lg"
-                src={imageSrc}
-                alt={name}
-                width={60}
-                height={60}
-              />
-              <div>
-                <h3 className="font-medium">{name}</h3>
-                <p className="text-sm text-gray-600">{`지역:` + region}</p>
-                {/* <p className="text-sm text-gray-600">{"높이:" + height + "m"}</p>
-              <p className="text-sm text-gray-600">{"최고봉:" + peak}</p> */}
-              </div>
+              <figure className="flex items-center rounded-lg p-2 shadow-md hover:bg-gray-100">
+                <Image
+                  className="mr-4 h-[60px] w-[60px] rounded-lg object-cover shadow-lg"
+                  src={imageSrc}
+                  alt={name}
+                  width={60}
+                  height={60}
+                />
+                <span>
+                  <h3 className="font-medium">{name}</h3>
+                  <p className="flex gap-x-6 text-sm text-gray-600">
+                    <span>{`지역 : ` + region}</span>
+                    <span>
+                      {"높이 : " + height.toLocaleString("en-US") + "m"}
+                    </span>
+                  </p>
+                  {/* <p className="text-sm text-gray-600">{"최고봉:" + peak}</p> */}
+                </span>
+              </figure>
             </Link>
           )
         )}
