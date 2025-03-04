@@ -1,6 +1,12 @@
-const MapSkeleton = () => {
+type Props = {
+  height: string;
+};
+
+const MapSkeleton = ({ height }: Props) => {
   return (
-    <div className="relative h-[500px] w-full animate-pulse overflow-hidden rounded-lg bg-gray-100">
+    <div
+      className={`relative ${height} w-full animate-pulse overflow-hidden rounded-lg bg-gray-100`}
+    >
       {/* 지도 배경 스켈레톤 */}
       <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-gray-300" />
 
