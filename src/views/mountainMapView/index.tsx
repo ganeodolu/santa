@@ -10,7 +10,7 @@ const LeafletMapWithNoSSR = dynamic(
   () => import("@/entities/map/ui/LeafletMap"),
   {
     ssr: false,
-    loading: () => <MapSkeleton "h-[40vh]" />
+    loading: () => <MapSkeleton />
   }
 );
 
