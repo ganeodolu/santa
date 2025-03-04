@@ -21,7 +21,7 @@ const MountainList = ({ mountainList }: Props) => {
                   width={234}
                   height={140}
                 />
-                <div className="flex items-center gap-2 p-4">
+                <div className="flex items-center gap-2 p-3">
                   <h3 className="text-lg font-bold">{name}</h3>
                   <span className="text-gray-600">{region}</span>
                 </div>

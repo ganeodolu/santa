@@ -30,7 +30,7 @@ const RecentKeyword = () => {
               aria-label="검색어 삭제"
               onClick={() => removeKeyword(keyword)}
             >
-              <span className="text-lg font-bold">×</span>
+              <span className="text-lg font-bold pt-1">×</span>
             </button>
           </div>
         ))}
