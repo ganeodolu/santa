@@ -1,7 +1,12 @@
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
 import type { Mountain } from "@/shared/constants";
-import { MOUNTAIN_INFORMATION_LIST, MOUNTAIN_NAMES, MOUNTAIN_KEYS, MOUNTAIN_INFORMATION } from "@/shared/constants";
+import {
+  MOUNTAIN_INFORMATION,
+  MOUNTAIN_INFORMATION_LIST,
+  MOUNTAIN_KEYS,
+  MOUNTAIN_NAMES
+} from "@/shared/constants";
 import dynamic from "next/dynamic";
 import { MouseEvent, useEffect, useState } from "react";
 import MountainInfoBar from "./ui/MountainInfoBar";
@@ -10,7 +15,7 @@ const LeafletMapWithNoSSR = dynamic(
   () => import("@/entities/map/ui/LeafletMap"),
   {
     ssr: false,
-    loading: () => <MapSkeleton />
+    loading: () => <MapSkeleton height="h-[90vh]" />
   }
 );
 
@@ -36,9 +41,7 @@ const MountainMapView = () => {
 
   return (
     <div className="mx-auto max-w-[500px] bg-white shadow-md">
-      <SearchHeaderWithBackNoFunction
-        href={"/search"}
-      />
+      <SearchHeaderWithBackNoFunction href={"/search"} />
       <section className="mb-4">
         {isMounted && (
           <div className="mx-auto">

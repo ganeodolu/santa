@@ -12,8 +12,8 @@ import {
 } from "@/shared/api/client";
 import type { Mountain } from "@/shared/constants";
 import { timeTransformWithBufferHour, xyConvert } from "@/shared/model";
-import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
 import AstronomyInfoCard from "@/views/mountainView/ui/AstronomyInfoCard";
+import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
 import { useQueries } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import dynamic from "next/dynamic";
@@ -137,7 +137,7 @@ const MountainView = ({ mountainData }: Props) => {
         </div>
       </section>
       <section className="m-2">
-        <h3 className="text-justify text-sm pl-2 pr-2">{introduction}</h3>
+        <h3 className="pr-2 pl-2 text-justify text-sm">{introduction}</h3>
       </section>
 
       {weatherData && (
