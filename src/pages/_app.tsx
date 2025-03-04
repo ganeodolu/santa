@@ -8,8 +8,15 @@ import localFont from "next/font/local";
 import Head from "next/head";
 
 export const pretendard = localFont({
-  src: "../../public/fonts/PretendardVariable.woff2",
+  src: [
+    {
+      path: "../../public/fonts/PretendardVariable.woff2",
+      weight: "100 900",
+      style: "normal"
+    }
+  ],
   variable: "--font-pretendard",
+  preload: true,
   display: "swap"
 });
 
