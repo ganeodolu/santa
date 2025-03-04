@@ -1,8 +1,16 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: "YiSunShinDotumM";
+  src: url("/fonts/YiSunShinDotumM.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   height: 100vh;
+  font-family: "YiSunShinDotumM", sans-serif;
 }
 
 /* :root {

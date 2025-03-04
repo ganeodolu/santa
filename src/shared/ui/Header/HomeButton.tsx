@@ -4,11 +4,11 @@ type Props = {
   href: string;
 };
 
-const HomeButton = ({href}: Props) => {
+const HomeButton = ({ href }: Props) => {
   return (
-    <Link 
-    className="mr-2 flex cursor-pointer items-center space-x-2 rounded-md bg-cyan-800 px-2 py-2 drop-shadow-md duration-300 hover:bg-cyan-600"
-    href={href}  
+    <Link
+      className="mr-2 flex cursor-pointer items-center space-x-2 rounded-md bg-cyan-800 px-2 py-2 drop-shadow-md duration-300 hover:bg-cyan-600"
+      href={href}
     >
       <svg
         className="fill-white"
