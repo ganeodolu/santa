@@ -4,7 +4,14 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Analytics } from "@vercel/analytics/react";
 import { Provider } from "jotai";
 import type { AppProps } from "next/app";
+import localFont from "next/font/local";
 import Head from "next/head";
+
+export const pretendard = localFont({
+  src: "../../public/fonts/PretendardVariable.woff2",
+  variable: "--font-pretendard",
+  display: "swap"
+});
 
 const queryClient = new QueryClient({
   defaultOptions: {

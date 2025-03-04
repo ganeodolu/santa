@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["YiSunShinDotumM", "sans-serif"]
+        pretendard: ["var(--font-pretendard)", "san-serif"]
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
