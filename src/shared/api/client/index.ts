@@ -1,11 +1,11 @@
 import {
+  NEXT_ASTRONOMY_ENDPOINT,
   NEXT_BASE_URL,
-  NEXT_WEATHER_ENDPOINT,
-  NEXT_ASTRONOMY_ENDPOINT
+  NEXT_WEATHER_ENDPOINT
 } from "@/shared/constants";
 import axios from "axios";
 
-export const apiWithOpenAPI = axios.create({
+const apiWithOpenAPI = axios.create({
   baseURL: NEXT_BASE_URL
 });
 
