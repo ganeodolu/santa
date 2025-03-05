@@ -20,7 +20,7 @@ const RecentKeyword = () => {
             className="flex items-center rounded-full bg-gray-200 hover:bg-gray-300"
           >
             <Link
-              className="px-3 py-1 text-sm"
+              className="pt-2 px-3 pb-1 text-sm"
               href={`/mountain/${MOUNTAIN_KEYS[MOUNTAIN_NAMES.indexOf(keyword)]}`}
             >
               {keyword}
