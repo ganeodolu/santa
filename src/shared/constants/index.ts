@@ -1,14 +1,16 @@
 export const BASE_URL = "https://apis.data.go.kr";
 
-export const WEATHER_ENDPOINT = "/1360000/VilageFcstInfoService_2.0/getVilageFcst";
+export const WEATHER_ENDPOINT =
+  "/1360000/VilageFcstInfoService_2.0/getVilageFcst";
 
-export const ASTRONOMY_ENDPOINT = "/B090041/openapi/service/RiseSetInfoService/getLCRiseSetInfo"
+export const ASTRONOMY_ENDPOINT =
+  "/B090041/openapi/service/RiseSetInfoService/getLCRiseSetInfo";
 
-export const NEXT_BASE_URL = "/api";
+export const CLIENT_BASE_URL = "/api";
 
-export const NEXT_WEATHER_ENDPOINT = "/weather";
+export const CLIENT_WEATHER_ENDPOINT = "/weather";
 
-export const NEXT_ASTRONOMY_ENDPOINT = "/astronomy";
+export const CLIENT_ASTRONOMY_ENDPOINT = "/astronomy";
 
 export const MOUNTAIN_NAMES = [
   "가야산",
@@ -64,7 +66,7 @@ export interface Mountain {
   cctv: {
     place: string | null;
     url: string | null;
-  },
+  };
   introduction: string;
 }
 
@@ -325,7 +327,8 @@ export const MOUNTAIN_INFORMATION: MountainInformation = {
       place: "상원사",
       url: "https://m.knps.or.kr/live/cctv17.do"
     },
-    introduction: "강원도에 위치한 산악형 국립공원으로, 구룡사와 비로봉이 유명합니다. 비로봉(1,288m)을 중심으로 다양한 등산로가 조성되어 있으며, 구룡폭포, 사고대 등 아름다운 자연 경관을 자랑합니다. 원주 지역의 대표적인 산으로, 사계절 내내 등산객들과 관광객들이 찾는 인기 있는 국립공원입니다."
+    introduction:
+      "강원도에 위치한 산악형 국립공원으로, 구룡사와 비로봉이 유명합니다. 비로봉(1,288m)을 중심으로 다양한 등산로가 조성되어 있으며, 구룡폭포, 사고대 등 아름다운 자연 경관을 자랑합니다. 원주 지역의 대표적인 산으로, 사계절 내내 등산객들과 관광객들이 찾는 인기 있는 국립공원입니다."
   },
   taebaek: {
     name: "태백산",
@@ -341,7 +344,8 @@ export const MOUNTAIN_INFORMATION: MountainInformation = {
       place: "천제단",
       url: "https://m.knps.or.kr/live/cctv6.do"
     },
-    introduction: "강원도와 경상북도에 걸친 산악형 국립공원으로, 고산 식물과 눈꽃이 아름답습니다. 천제봉(1,567m)을 주봉으로 하며, 태백산 천제단, 구문소 등 역사적 명소와 함께 다양한 고산 식물들이 서식하고 있습니다. 겨울철 설경이 특히 아름다워 많은 관광객들이 찾으며, 태백산 눈축제로도 유명합니다."
+    introduction:
+      "강원도와 경상북도에 걸친 산악형 국립공원으로, 고산 식물과 눈꽃이 아름답습니다. 천제봉(1,567m)을 주봉으로 하며, 태백산 천제단, 구문소 등 역사적 명소와 함께 다양한 고산 식물들이 서식하고 있습니다. 겨울철 설경이 특히 아름다워 많은 관광객들이 찾으며, 태백산 눈축제로도 유명합니다."
   },
   palgong: {
     name: "팔공산",
@@ -357,7 +361,8 @@ export const MOUNTAIN_INFORMATION: MountainInformation = {
       place: null,
       url: null
     },
-    introduction: "2023년 12월 31일에 지정된 가장 최근의 국립공원으로, 대구광역시와 경상북도에 걸쳐 있습니다. 비로봉(1,192m)을 중심으로 동화사, 파계사 등 유서 깊은 사찰들과 함께 다양한 등산로가 조성되어 있습니다. 대구 시민들의 휴식처로 사랑받고 있으며, 역사적으로도 중요한 의미를 지닌 산으로 알려져 있습니다."
+    introduction:
+      "2023년 12월 31일에 지정된 가장 최근의 국립공원으로, 대구광역시와 경상북도에 걸쳐 있습니다. 비로봉(1,192m)을 중심으로 동화사, 파계사 등 유서 깊은 사찰들과 함께 다양한 등산로가 조성되어 있습니다. 대구 시민들의 휴식처로 사랑받고 있으며, 역사적으로도 중요한 의미를 지닌 산으로 알려져 있습니다."
   },
   halla: {
     name: "한라산",
@@ -373,7 +378,8 @@ export const MOUNTAIN_INFORMATION: MountainInformation = {
       place: "백록담",
       url: "https://www.jeju.go.kr/tool/halla/cctv_01.html"
     },
-    introduction: "제주특별자치도에 위치한 산악형 국립공원으로, 대한민국 최고봉(1,950m)입니다. 화산활동으로 형성된 독특한 지형과 다양한 식생대가 특징이며, 백록담, 영실기암 등 아름다운 자연 경관을 자랑합니다. 제주도의 상징적인 존재로, 유네스코 세계자연유산으로 지정되어 있어 전 세계적으로 주목받는 국립공원입니다."
+    introduction:
+      "제주특별자치도에 위치한 산악형 국립공원으로, 대한민국 최고봉(1,950m)입니다. 화산활동으로 형성된 독특한 지형과 다양한 식생대가 특징이며, 백록담, 영실기암 등 아름다운 자연 경관을 자랑합니다. 제주도의 상징적인 존재로, 유네스코 세계자연유산으로 지정되어 있어 전 세계적으로 주목받는 국립공원입니다."
   }
 };
 
@@ -685,4 +691,3 @@ export const MOUNTAIN_INFORMATION_LIST: Mountain[] = [
       "제주특별자치도에 위치한 산악형 국립공원으로, 대한민국 최고봉(1,950m)입니다. 화산활동으로 형성된 독특한 지형과 다양한 식생대가 특징이며, 백록담, 영실기암 등 아름다운 자연 경관을 자랑합니다. 제주도의 상징적인 존재로, 유네스코 세계자연유산으로 지정되어 있어 전 세계적으로 주목받는 국립공원입니다."
   }
 ];
-

@@ -1,10 +1,8 @@
-import { WEATHER_ENDPOINT } from "@/shared/constants";
-import {
-  extractWeatherData,
-  timeTransformWithBufferHour
-} from "@/shared/model";
+import { filterAndExtractWeatherData } from "@/shared/model";
 import { nextApiWithOpenAPI } from "@/shared/api/next";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { WEATHER_ENDPOINT } from "@/shared/constants";
+
 
 export default async function weatherHandler(
   req: NextApiRequest,
@@ -12,33 +10,13 @@ export default async function weatherHandler(
 ) {
   try {
     const { gridX, gridY } = req.query;
-    const [base_date, base_time] = timeTransformWithBufferHour(0.5);
-    const response = await nextApiWithOpenAPI(WEATHER_ENDPOINT,{
-      params: {
-        serviceKey: process.env.NEXT_PUBLIC_WEATHER_API_KEY,
-        numOfRows: "300",
-        pageNo: "1",
-        base_date,
-        base_time,
-        nx: gridX,
-        ny: gridY,
-        dataType: "JSON"
-      }
-    });
-    const extractedWeatherData = extractWeatherData(
-      response.data.response.body.items.item,
-      [
-        "TMP",
-        "SKY",
-        "POP",
-        "PTY"
-        // "WSD",
-        // "PCP"
-      ]
+    const filteredExtractedWeatherData = await filterAndExtractWeatherData(
+      nextApiWithOpenAPI,
+      WEATHER_ENDPOINT,
+      Number(gridX),
+      Number(gridY)
     );
-    const filteredExtractedWeatherData = extractedWeatherData.filter(
-      (_, idx) => idx % 3 === 0
-    );
+
     res.status(200).json(filteredExtractedWeatherData);
   } catch (error) {
     res.status(500).json(null);

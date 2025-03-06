@@ -1,6 +1,6 @@
-import { ASTRONOMY_ENDPOINT } from "@/shared/constants";
 import { nextApiWithOpenAPI } from "@/shared/api/next";
-import dayjs from "dayjs";
+import { ASTRONOMY_ENDPOINT } from "@/shared/constants";
+import { extractAstronomyData } from "@/shared/model";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type SunTime = {
@@ -14,17 +14,14 @@ export default async function astronomyHandler(
 ) {
   try {
     const { lat, lon } = req.query;
-    const response = await nextApiWithOpenAPI(ASTRONOMY_ENDPOINT,{
-      params: {
-        ServiceKey: process.env.NEXT_PUBLIC_ASTRONOMY_API_KEY,
-        latitude: lat,
-        longitude: lon,
-        dnYn: "Y",
-        locdate: dayjs().format("YYYYMMDD")
-      }
-    });
-    const { sunrise, sunset } = response.data.response.body.items.item;
-    res.status(200).json({ sunrise: sunrise.trim(), sunset: sunset.trim() });
+    const extractedAstronomyData = await extractAstronomyData(
+      nextApiWithOpenAPI,
+      ASTRONOMY_ENDPOINT,
+      Number(lat),
+      Number(lon)
+    );
+
+    res.status(200).json(extractedAstronomyData);
   } catch (error) {
     res.status(500).json({ sunrise: "데이터 없음", sunset: "데이터 없음" });
   }

@@ -1,16 +1,16 @@
 import {
-  NEXT_ASTRONOMY_ENDPOINT,
-  NEXT_BASE_URL,
-  NEXT_WEATHER_ENDPOINT
+  CLIENT_ASTRONOMY_ENDPOINT,
+  CLIENT_BASE_URL,
+  CLIENT_WEATHER_ENDPOINT
 } from "@/shared/constants";
 import axios from "axios";
 
 const apiWithOpenAPI = axios.create({
-  baseURL: NEXT_BASE_URL
+  baseURL: CLIENT_BASE_URL
 });
 
-export const getWeatherInformation = async (x: number, y: number) => {
-  const response = await apiWithOpenAPI(NEXT_WEATHER_ENDPOINT, {
+export const getClientWeatherInformation = async (x: number, y: number) => {
+  const response = await apiWithOpenAPI(CLIENT_WEATHER_ENDPOINT, {
     params: {
       gridX: x,
       gridY: y
@@ -20,8 +20,11 @@ export const getWeatherInformation = async (x: number, y: number) => {
   return response.data;
 };
 
-export const getAstronomyInformation = async (lat: number, lon: number) => {
-  const response = await apiWithOpenAPI(NEXT_ASTRONOMY_ENDPOINT, {
+export const getClientAstronomyInformation = async (
+  lat: number,
+  lon: number
+) => {
+  const response = await apiWithOpenAPI(CLIENT_ASTRONOMY_ENDPOINT, {
     params: {
       lat,
       lon

@@ -1,3 +1,8 @@
+import { AxiosInstance } from "axios";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
+
 interface IndexSignatureConvertGrid {
   [i: string]: number;
 }
@@ -135,3 +140,63 @@ export const extractWeatherData: ExtractWeatherData = (
 
   return extractedWeatherData;
 };
+
+export const filterAndExtractWeatherData = async (
+  axiosInstance: AxiosInstance,
+  endPoint: string,
+  gridX: number,
+  gridY: number
+) => {
+  const [base_date, base_time] = timeTransformWithBufferHour(0.5);
+  const response = await axiosInstance(endPoint, {
+    params: {
+      serviceKey: process.env.NEXT_PUBLIC_WEATHER_API_KEY,
+      numOfRows: "300",
+      pageNo: "1",
+      base_date,
+      base_time,
+      nx: gridX,
+      ny: gridY,
+      dataType: "JSON"
+    }
+  });
+  const extractedWeatherData = extractWeatherData(
+    response.data.response.body.items.item,
+    [
+      "TMP",
+      "SKY",
+      "POP",
+      "PTY"
+      // "WSD",
+      // "PCP"
+    ]
+  );
+  const filteredExtractedWeatherData = extractedWeatherData.filter(
+    (_, idx) => idx % 3 === 0
+  );
+
+  return filteredExtractedWeatherData;
+};
+
+export const extractAstronomyData = async (
+  axiosInstance: AxiosInstance,
+  endPoint: string,
+  lat: number,
+  lon: number
+) => {
+  const response = await axiosInstance(endPoint, {
+    params: {
+      ServiceKey: process.env.NEXT_PUBLIC_ASTRONOMY_API_KEY,
+      latitude: lat,
+      longitude: lon,
+      dnYn: "Y",
+      locdate: dayjs().format("YYYYMMDD")
+    }
+  });
+  const { sunrise, sunset } = response.data.response.body.items.item;
+
+  return {
+    sunrise: dayjs(sunrise.trim(), "HHmm").format("A hh:mm"),
+    sunset: dayjs(sunset.trim(), "HHmm").format("A hh:mm")
+  };
+}

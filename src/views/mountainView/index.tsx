@@ -7,8 +7,8 @@ import {
 } from "@/entities/chart/ui";
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import {
-  getAstronomyInformation,
-  getWeatherInformation
+  getClientAstronomyInformation,
+  getClientWeatherInformation
 } from "@/shared/api/client";
 import type { Mountain } from "@/shared/constants";
 import { timeTransformWithBufferHour, xyConvert } from "@/shared/model";
@@ -77,11 +77,11 @@ const MountainView = ({ mountainData }: Props) => {
     queries: [
       {
         queryKey: ["getWeather", x, y, timeTransformWithBufferHour(0.5)],
-        queryFn: () => getWeatherInformation(x, y)
+        queryFn: () => getClientWeatherInformation(x, y)
       },
       {
         queryKey: ["getAstronomy", lon, lat, dayjs().format("YYYYMMDD")],
-        queryFn: () => getAstronomyInformation(lat, lon)
+        queryFn: () => getClientAstronomyInformation(lat, lon)
       }
     ]
   });
