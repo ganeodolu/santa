@@ -1,4 +1,7 @@
-import { filterAndExtractWeatherData } from "@/shared/model";
+import {
+  filterAndExtractWeatherData,
+  timeTransformWithBufferHour
+} from "@/shared/model";
 import { nextApiWithOpenAPI } from "@/shared/api/next";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { WEATHER_ENDPOINT } from "@/shared/constants";
@@ -10,11 +13,14 @@ export default async function weatherHandler(
 ) {
   try {
     const { gridX, gridY } = req.query;
+    const [baseDate, baseTime] = timeTransformWithBufferHour(0.5);
     const filteredExtractedWeatherData = await filterAndExtractWeatherData(
       nextApiWithOpenAPI,
       WEATHER_ENDPOINT,
       Number(gridX),
-      Number(gridY)
+      Number(gridY),
+      baseDate,
+      baseTime
     );
 
     res.status(200).json(filteredExtractedWeatherData);
