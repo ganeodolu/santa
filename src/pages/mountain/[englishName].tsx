@@ -1,7 +1,7 @@
 import {
-  getAstronomyInformation,
-  getWeatherInformation
-} from "@/shared/api/client";
+  getBasicWeatherInformation,
+  getBasicAstronomyInformation
+} from "@/shared/api/basic";
 import type { Mountain } from "@/shared/constants";
 import { MOUNTAIN_INFORMATION_LIST, MOUNTAIN_KEYS } from "@/shared/constants";
 import { timeTransformWithBufferHour, xyConvert } from "@/shared/model";
@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<{
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: ["getWeather", x, y, timeTransformWithBufferHour(0.5)],
-      queryFn: () => getWeatherInformation(x, y)
+      queryFn: () => getBasicWeatherInformation(x, y)
     }),
     queryClient.prefetchQuery({
       queryKey: [
@@ -56,7 +56,8 @@ export const getStaticProps: GetStaticProps<{
         mountainData.lat,
         dayjs().format("YYYYMMDD")
       ],
-      queryFn: () => getAstronomyInformation(mountainData.lat, mountainData.lon)
+      queryFn: () =>
+        getBasicAstronomyInformation(mountainData.lat, mountainData.lon)
     })
   ]);
 
