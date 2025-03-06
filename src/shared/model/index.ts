@@ -145,16 +145,17 @@ export const filterAndExtractWeatherData = async (
   axiosInstance: AxiosInstance,
   endPoint: string,
   gridX: number,
-  gridY: number
+  gridY: number,
+  baseDate: string,
+  baseTime: string
 ) => {
-  const [base_date, base_time] = timeTransformWithBufferHour(0.5);
   const response = await axiosInstance(endPoint, {
     params: {
       serviceKey: process.env.NEXT_PUBLIC_WEATHER_API_KEY,
       numOfRows: "300",
       pageNo: "1",
-      base_date,
-      base_time,
+      base_date: baseDate,
+      base_time: baseTime,
       nx: gridX,
       ny: gridY,
       dataType: "JSON"
@@ -199,4 +200,4 @@ export const extractAstronomyData = async (
     sunrise: dayjs(sunrise.trim(), "HHmm").format("A hh:mm"),
     sunset: dayjs(sunset.trim(), "HHmm").format("A hh:mm")
   };
-}
+};

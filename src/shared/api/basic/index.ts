@@ -5,7 +5,8 @@ import {
 } from "@/shared/constants";
 import {
   extractAstronomyData,
-  filterAndExtractWeatherData
+  filterAndExtractWeatherData,
+  timeTransformWithBufferHour
 } from "@/shared/model";
 import axios from "axios";
 
@@ -14,11 +15,15 @@ export const basicApiWithOpenAPI = axios.create({
 });
 
 export const getBasicWeatherInformation = async (x: number, y: number) => {
+  const [baseDate, baseTime] = timeTransformWithBufferHour(0.5);
+
   return filterAndExtractWeatherData(
     basicApiWithOpenAPI,
     WEATHER_ENDPOINT,
     x,
-    y
+    y,
+    baseDate,
+    baseTime
   );
 };
 
