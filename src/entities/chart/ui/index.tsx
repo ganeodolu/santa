@@ -127,7 +127,7 @@ export const CustomizedDot = (props: CustomizedDotProps) => {
 export const CustomTooltip = (props: TooltipProps<number, string>) => {
   const { active, payload } = props;
   if (active && payload?.length) {
-    const formatTime = dayjs(payload[0].payload.timestamp, "MM-DD-HH").format(
+    const formatTime = dayjs(payload[0].payload.timestamp, "YYYYMMDDHHmm").format(
       "MM월 DD일 HH시"
     );
     return (
