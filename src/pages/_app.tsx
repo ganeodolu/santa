@@ -1,11 +1,16 @@
 import "@/styles/globals.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  HydrationBoundary
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Analytics } from "@vercel/analytics/react";
 import { Provider } from "jotai";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
 import Head from "next/head";
+import { useState } from "react";
 
 export const pretendard = localFont({
   src: [
@@ -20,15 +25,21 @@ export const pretendard = localFont({
   display: "swap"
 });
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false
-    }
-  }
-});
-
 export default function App({ Component, pageProps }: AppProps) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 1 * 60 * 60 * 1000, // 1시간
+            gcTime: 3 * 60 * 60 * 1000,
+            refetchOnWindowFocus: false,
+            retry: 1,
+          }
+        }
+      })
+  );
+
   return (
     <>
       <Head>
@@ -46,10 +57,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:image" content="/ogImage.png" />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Provider>
-          <Component {...pageProps} />
-        </Provider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <HydrationBoundary state={pageProps.dehydratedState}>
+          <Provider>
+            <Component {...pageProps} />
+          </Provider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </HydrationBoundary>
       </QueryClientProvider>
       <Analytics />
     </>

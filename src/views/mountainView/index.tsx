@@ -59,9 +59,7 @@ const MountainView = ({ mountainData }: Props) => {
     cctv,
     introduction
   } = mountainData;
-
   const { x, y } = xyConvert(lat, lon);
-
   const [
     {
       data: weatherData,
@@ -79,13 +77,11 @@ const MountainView = ({ mountainData }: Props) => {
     queries: [
       {
         queryKey: ["getWeather", x, y, timeTransformWithBufferHour(0.5)],
-        queryFn: () => getWeatherInformation(x, y),
-        retry: 1
+        queryFn: () => getWeatherInformation(x, y)
       },
       {
         queryKey: ["getAstronomy", lon, lat, dayjs().format("YYYYMMDD")],
-        queryFn: () => getAstronomyInformation(lat, lon),
-        retry: 1
+        queryFn: () => getAstronomyInformation(lat, lon)
       }
     ]
   });
@@ -220,7 +216,6 @@ const MountainView = ({ mountainData }: Props) => {
       ) : (
         <AstronomyInfoCard astronomyData={astronomyData} />
       )}
-
       <CCTVExternalLink cctv={cctv} />
     </article>
   );
