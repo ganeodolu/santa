@@ -64,7 +64,8 @@ export const getStaticProps: GetStaticProps<{
   return {
     props: {
       mountainData,
-      dehydratedState: dehydrate(queryClient)
+      dehydratedState: dehydrate(queryClient),
+      revalidate: 3600
     }
   };
 };
