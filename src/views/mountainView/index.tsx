@@ -158,6 +158,7 @@ const MountainView = ({ mountainData }: Props) => {
                 type="number"
                 yAxisId="TMP"
                 domain={["dataMin - 10", "dataMax + 2"]}
+                interval={0}
                 ticks={generateYAxisTicks(
                   weatherData as weatherDataProps[],
                   "TMP",
