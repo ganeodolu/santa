@@ -1,6 +1,8 @@
 import { AxiosInstance } from "axios";
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
+dayjs.extend(customParseFormat);
 interface IndexSignatureConvertGrid {
   [i: string]: number;
 }

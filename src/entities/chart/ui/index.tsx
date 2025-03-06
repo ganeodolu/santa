@@ -128,7 +128,7 @@ export const CustomTooltip = (props: TooltipProps<number, string>) => {
   const { active, payload } = props;
   if (active && payload?.length) {
     const formatTime = dayjs(payload[0].payload.timestamp, "YYYYMMDDHHmm").format(
-      "MM월 DD일 HH시"
+      "MM월 DD일 A h시"
     );
     return (
       <div className="rounded border bg-white p-2 shadow">
