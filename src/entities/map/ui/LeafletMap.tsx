@@ -1,4 +1,3 @@
-import MapBackButton from "@/entities/map/ui/MapBackButton";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
@@ -20,7 +19,6 @@ type Props = {
   zoom: number;
   height: string;
   markerPositions: [number, number][];
-  isShowBackButton: boolean;
   handleTooltipClick?: (e: MouseEvent<HTMLElement>) => void;
 };
 
@@ -31,7 +29,6 @@ const LeafletMap = ({
   height,
   zoom,
   markerPositions,
-  isShowBackButton,
   handleTooltipClick
 }: Props) => {
   return (
@@ -72,7 +69,6 @@ const LeafletMap = ({
           );
         })}
       </MarkerClusterGroup>
-      {isShowBackButton && <MapBackButton />}
     </MapContainer>
   );
 };
