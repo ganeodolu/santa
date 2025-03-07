@@ -4,7 +4,7 @@ import {
 } from "@/shared/api/basic";
 import type { Mountain } from "@/shared/constants";
 import { MOUNTAIN_INFORMATION_LIST, MOUNTAIN_KEYS } from "@/shared/constants";
-import { timeTransformWithBufferHour, xyConvert } from "@/shared/model";
+import { forecastUTC9TimeTransformWithBufferHour, xyConvert } from "@/shared/model";
 import MountainView from "@/views/mountainView";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import dayjs from "dayjs";
@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps<{
 
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: ["getWeather", x, y, timeTransformWithBufferHour(0.5)],
+      queryKey: ["getWeather", x, y, forecastUTC9TimeTransformWithBufferHour(0.5)],
       queryFn: () => getBasicWeatherInformation(x, y)
     }),
     queryClient.prefetchQuery({

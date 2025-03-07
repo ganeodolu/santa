@@ -1,8 +1,11 @@
 import { AxiosInstance } from "axios";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import utc from "dayjs/plugin/utc";
 
 dayjs.extend(customParseFormat);
+dayjs.extend(utc);
+
 interface IndexSignatureConvertGrid {
   [i: string]: number;
 }
@@ -63,27 +66,61 @@ const FORECAST_TIME_STRING_ARRAY = [
   "2300"
 ];
 
-export const timeTransformWithBufferHour = (beforeHour: number) => {
-  let current = new Date(Date.now() - 1000 * 60 * 60 * beforeHour);
-  let time: number = current.getHours() * 100;
-  let resultTime;
-  if (time < 200) {
-    current = new Date(current.setDate(current.getDate() - 1));
-    resultTime = String(2300);
-  } else {
-    const closestIndex = FORECAST_TIME_NUMBER_ARRAY.findIndex((val) => {
-      return time - 300 <= val;
-    });
-    resultTime = FORECAST_TIME_STRING_ARRAY[closestIndex];
-  }
-  let resultDate = current
-    .toISOString()
-    .slice(0, 10)
-    .replace(/-/g, "")
-    .split(".")
-    .toString();
+// export const timeTransformWithBufferHour = (beforeHour: number) => {
+//   let current = new Date(Date.now() - 1000 * 60 * 60 * beforeHour);
+//   let time: number = current.getHours() * 100;
+//   let resultTime;
+//   if (time < 200) {
+//     current = new Date(current.setDate(current.getDate() - 1));
+//     resultTime = String(2300);
+//   } else {
+//     const closestIndex = FORECAST_TIME_NUMBER_ARRAY.findIndex((val) => {
+//       return time - 300 <= val;
+//     });
+//     resultTime = FORECAST_TIME_STRING_ARRAY[closestIndex];
+//   }
+//   let resultDate = current
+//     .toISOString()
+//     .slice(0, 10)
+//     .replace(/-/g, "")
+//     .split(".")
+//     .toString();
 
-  return [resultDate, resultTime];
+//   return [resultDate, resultTime];
+// };
+
+const FORECAST_HOUR_NUMBER_ARRAY = [2, 5, 8, 11, 14, 17, 20, 23];
+
+export const forecastUTC9TimeTransformWithBufferHour = (beforeHour: number) => {
+  const currentUTC9withBuffer = dayjs()
+    .utc()
+    .utcOffset(9)
+    .subtract(beforeHour, "hour");
+  const currentUTC9withBufferHour = currentUTC9withBuffer.hour();
+
+  if (currentUTC9withBufferHour < 2) {
+    // 현재 시간이 첫 예보시간인 2시 이전
+    const forecastDate = currentUTC9withBuffer
+      .subtract(1, "day")
+      .hour(23)
+      .minute(0);
+
+    return [forecastDate.format("YYYYMMDD"), forecastDate.format("HHmm")];
+  }
+  if (currentUTC9withBufferHour >= 2) {
+    // 현재 시간이 첫 예보시간인 2시 이후
+    const forecastHour = FORECAST_HOUR_NUMBER_ARRAY.find(
+      (FORECAST_HOUR) => currentUTC9withBufferHour < FORECAST_HOUR + 3
+    );
+    if (forecastHour !== undefined) {
+      const forecastDate = currentUTC9withBuffer.hour(forecastHour).minute(0);
+
+      return [forecastDate.format("YYYYMMDD"), forecastDate.format("HHmm")];
+    }
+  }
+  console.log("error");
+
+  return ["", ""];
 };
 
 type Weather = {

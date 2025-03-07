@@ -1,6 +1,6 @@
 import {
   filterAndExtractWeatherData,
-  timeTransformWithBufferHour
+  forecastUTC9TimeTransformWithBufferHour
 } from "@/shared/model";
 import { nextApiWithOpenAPI } from "@/shared/api/next";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -13,7 +13,7 @@ export default async function weatherHandler(
 ) {
   try {
     const { gridX, gridY } = req.query;
-    const [baseDate, baseTime] = timeTransformWithBufferHour(0.5);
+    const [baseDate, baseTime] = forecastUTC9TimeTransformWithBufferHour(0.5);
     const filteredExtractedWeatherData = await filterAndExtractWeatherData(
       nextApiWithOpenAPI,
       WEATHER_ENDPOINT,

@@ -11,7 +11,7 @@ import {
   getClientWeatherInformation
 } from "@/shared/api/client";
 import type { Mountain } from "@/shared/constants";
-import { timeTransformWithBufferHour, xyConvert } from "@/shared/model";
+import { forecastUTC9TimeTransformWithBufferHour, xyConvert } from "@/shared/model";
 import AstronomyInfoCard from "@/views/mountainView/ui/AstronomyInfoCard";
 import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
 import { useQueries } from "@tanstack/react-query";
@@ -76,7 +76,7 @@ const MountainView = ({ mountainData }: Props) => {
   ] = useQueries({
     queries: [
       {
-        queryKey: ["getWeather", x, y, timeTransformWithBufferHour(0.5)],
+        queryKey: ["getWeather", x, y, forecastUTC9TimeTransformWithBufferHour(0.5)],
         queryFn: () => getClientWeatherInformation(x, y)
       },
       {
