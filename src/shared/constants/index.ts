@@ -370,7 +370,7 @@ export const MOUNTAIN_INFORMATION: MountainInformation = {
     lat: 33.361747,
     lon: 126.529195,
     height: 1950,
-    peak: "혈망봉",
+    peak: "윗세오름",
     region: "제주",
     imageSrc:
       "https://cdn.pixabay.com/photo/2017/04/22/08/50/winter-2250856_1280.jpg",
@@ -679,7 +679,7 @@ export const MOUNTAIN_INFORMATION_LIST: Mountain[] = [
     lat: 33.361747,
     lon: 126.529195,
     height: 1950,
-    peak: "혈망봉",
+    peak: "윗세오름",
     region: "제주",
     imageSrc:
       "https://cdn.pixabay.com/photo/2017/04/22/08/50/winter-2250856_1280.jpg",
