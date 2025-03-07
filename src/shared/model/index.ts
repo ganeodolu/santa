@@ -51,44 +51,6 @@ export const xyConvert = (v1: number, v2: number) => {
   return rs;
 };
 
-const FORECAST_TIME_NUMBER_ARRAY = [
-  200, 500, 800, 1100, 1400, 1700, 2000, 2300
-];
-
-const FORECAST_TIME_STRING_ARRAY = [
-  "0200",
-  "0500",
-  "0800",
-  "1100",
-  "1400",
-  "1700",
-  "2000",
-  "2300"
-];
-
-// export const timeTransformWithBufferHour = (beforeHour: number) => {
-//   let current = new Date(Date.now() - 1000 * 60 * 60 * beforeHour);
-//   let time: number = current.getHours() * 100;
-//   let resultTime;
-//   if (time < 200) {
-//     current = new Date(current.setDate(current.getDate() - 1));
-//     resultTime = String(2300);
-//   } else {
-//     const closestIndex = FORECAST_TIME_NUMBER_ARRAY.findIndex((val) => {
-//       return time - 300 <= val;
-//     });
-//     resultTime = FORECAST_TIME_STRING_ARRAY[closestIndex];
-//   }
-//   let resultDate = current
-//     .toISOString()
-//     .slice(0, 10)
-//     .replace(/-/g, "")
-//     .split(".")
-//     .toString();
-
-//   return [resultDate, resultTime];
-// };
-
 const FORECAST_HOUR_NUMBER_ARRAY = [2, 5, 8, 11, 14, 17, 20, 23];
 
 export const forecastUTC9TimeTransformWithBufferHour = (beforeHour: number) => {
