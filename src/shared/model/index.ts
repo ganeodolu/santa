@@ -190,7 +190,7 @@ export const extractAstronomyData = async (
       latitude: lat,
       longitude: lon,
       dnYn: "Y",
-      locdate: dayjs().format("YYYYMMDD")
+      locdate: dayjs().utc().utcOffset(9).format("YYYYMMDD")
     }
   });
   const { sunrise, sunset } = response.data.response.body.items.item;
