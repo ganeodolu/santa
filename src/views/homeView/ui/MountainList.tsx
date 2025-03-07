@@ -8,7 +8,7 @@ type Props = {
 
 const MountainList = ({ mountainList }: Props) => {
   return (
-    <section className="container mx-auto px-4 pt-4 pb-8">
+    <section className="container mx-auto px-4 pt-4 pb-12">
       <div className="-mx-2 flex flex-wrap">
         {mountainList.map(({ name, englishName, region, imageSrc }) => (
           <div key={englishName} className="mb-4 w-1/2 px-2">
