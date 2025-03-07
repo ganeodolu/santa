@@ -1,15 +1,17 @@
 import { ReactNode } from "react";
 
-type BaseHeaderProps = {
+type BaseFixedHeaderProps = {
   children: ReactNode;
 };
 
-const BaseHeader = ({ children }: BaseHeaderProps) => (
-  <header className="sticky top-0 bg-white shadow-md">
-    <div className="container mx-auto px-4 py-4">
-      <div className="relative flex items-center">{children}</div>
-    </div>
-  </header>
-);
+const BaseHeader = ({ children }: BaseFixedHeaderProps) => {
+  return (
+    <header className={`bg-white shadow-md`}>
+      <div className="container mx-auto px-4 py-4">
+        <div className="relative flex items-center">{children}</div>
+      </div>
+    </header>
+  );
+};
 
-export default BaseHeader
+export default BaseHeader;

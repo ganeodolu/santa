@@ -1,4 +1,4 @@
-import SearchHeaderWithBack from "@/features/Header/ui/SearchHeaderWithBack";
+import SearchStickyHeaderWithBack from "@/features/Header/ui/SearchStickyHeaderWithBack";
 import { useSearch } from "@/shared/model/useSearchKeyword";
 import RecentKeyword from "@/views/searchView/ui/RecentKeyword";
 import SearchResult from "@/views/searchView/ui/SearchResult";
@@ -8,7 +8,7 @@ const SearchView = () => {
 
   return (
     <div className="mx-auto max-w-[500px] rounded-lg bg-white shadow-md">
-      <SearchHeaderWithBack
+      <SearchStickyHeaderWithBack
         searchKeyword={searchKeyword}
         onChange={handleChange}
       />

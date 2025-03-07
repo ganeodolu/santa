@@ -1,4 +1,4 @@
-import BaseHeader from "@/shared/ui/Header/BaseHeader";
+import BaseStickyHeader from "@/shared/ui/Header/BaseStickyHeader";
 import SearchInput from "@/shared/ui/Header/SearchInput";
 import Link from "next/link";
 
@@ -6,12 +6,12 @@ type Props = {
   href: string;
 };
 
-const SearchHeader = ({ href }: Props) => (
-  <BaseHeader>
+const SearchStickyHeader = ({ href }: Props) => (
+  <BaseStickyHeader>
     <Link href={href} className="w-full">
       <SearchInput isAutoFocused={false} />
     </Link>
-  </BaseHeader>
+  </BaseStickyHeader>
 );
 
-export default SearchHeader;
+export default SearchStickyHeader;

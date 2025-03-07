@@ -1,5 +1,5 @@
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
-import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
+import SearchStickyHeaderWithBackNoFunction from "@/features/Header/ui/SearchStickyHeaderWithBackNoFunction";
 import type { Mountain } from "@/shared/constants";
 import {
   MOUNTAIN_INFORMATION,
@@ -41,7 +41,7 @@ const MountainMapView = () => {
 
   return (
     <div className="mx-auto max-w-[500px] bg-white shadow-md">
-      <SearchHeaderWithBackNoFunction href={"/search"} />
+      <SearchStickyHeaderWithBackNoFunction href={"/search"} />
       <section className="mb-4">
         {isMounted && (
           <div className="mx-auto">
@@ -55,7 +55,6 @@ const MountainMapView = () => {
                 lat,
                 lon
               ])}
-              isShowBackButton={false}
               handleTooltipClick={handleTooltipClick}
             />
           </div>

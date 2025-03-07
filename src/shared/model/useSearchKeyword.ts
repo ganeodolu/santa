@@ -16,6 +16,7 @@ export const useSearch = () => {
         return true;
       }
     });
+    
     return results;
   };
 

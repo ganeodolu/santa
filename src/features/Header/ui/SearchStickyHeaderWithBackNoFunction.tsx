@@ -1,5 +1,5 @@
 import BackButton from "@/shared/ui/Header/BackButton";
-import BaseHeader from "@/shared/ui/Header/BaseHeader";
+import BaseStickyHeader from "@/shared/ui/Header/BaseStickyHeader";
 import HomeButton from "@/shared/ui/Header/HomeButton";
 import SearchInput from "@/shared/ui/Header/SearchInput";
 import Link from "next/link";
@@ -8,14 +8,14 @@ type Props = {
   href: string;
 };
 
-const SearchHeaderWithBackNoFunction = ({ href }: Props) => (
-  <BaseHeader>
+const SearchStickyHeaderWithBackNoFunction = ({ href }: Props) => (
+  <BaseStickyHeader>
     <BackButton />
     <HomeButton href={"/"} />
     <Link href={href} className="w-full">
       <SearchInput isAutoFocused={false} />
     </Link>
-  </BaseHeader>
+  </BaseStickyHeader>
 );
 
-export default SearchHeaderWithBackNoFunction;
+export default SearchStickyHeaderWithBackNoFunction;

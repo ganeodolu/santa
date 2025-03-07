@@ -6,12 +6,16 @@ import {
   generateYAxisTicks
 } from "@/entities/chart/ui";
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
+import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
 import {
   getClientAstronomyInformation,
   getClientWeatherInformation
 } from "@/shared/api/client";
 import type { Mountain } from "@/shared/constants";
-import { forecastUTC9TimeTransformWithBufferHour, xyConvert } from "@/shared/model";
+import {
+  forecastUTC9TimeTransformWithBufferHour,
+  xyConvert
+} from "@/shared/model";
 import AstronomyInfoCard from "@/views/mountainView/ui/AstronomyInfoCard";
 import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
 import { useQueries } from "@tanstack/react-query";
@@ -76,7 +80,12 @@ const MountainView = ({ mountainData }: Props) => {
   ] = useQueries({
     queries: [
       {
-        queryKey: ["getWeather", x, y, forecastUTC9TimeTransformWithBufferHour(0.5)],
+        queryKey: [
+          "getWeather",
+          x,
+          y,
+          forecastUTC9TimeTransformWithBufferHour(0.5)
+        ],
         queryFn: () => getClientWeatherInformation(x, y)
       },
       {
@@ -92,6 +101,7 @@ const MountainView = ({ mountainData }: Props) => {
 
   return (
     <article className="container mx-auto max-w-[500px] bg-white shadow-md">
+      <SearchHeaderWithBackNoFunction href={"/search"} />
       <section className="mb-4">
         {isMounted && (
           <div className="mx-auto">
@@ -102,7 +112,6 @@ const MountainView = ({ mountainData }: Props) => {
               markerNames={[name]}
               markerEnglishNames={[englishName]}
               markerPositions={[[lat, lon]]}
-              isShowBackButton={true}
             />
           </div>
         )}
@@ -117,7 +126,6 @@ const MountainView = ({ mountainData }: Props) => {
             height={140}
           />
         </div>
-
         <div className="flex w-1/3 flex-col justify-center pl-4">
           <h1 className="mb-2 text-2xl font-bold">{name}</h1>
           <p className="mb-1">
