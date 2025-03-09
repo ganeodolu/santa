@@ -9,6 +9,9 @@ import MountainView from "@/views/mountainView";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { GetStaticPaths, GetStaticProps } from "next";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 interface MountainPageProps {
   mountainData: Mountain;
@@ -46,7 +49,12 @@ export const getStaticProps: GetStaticProps<{
 
   await Promise.all([
     queryClient.prefetchQuery({
-      queryKey: ["getWeather", x, y, forecastUTC9TimeTransformWithBufferHour(0.5)],
+      queryKey: [
+        "getWeather",
+        x,
+        y,
+        forecastUTC9TimeTransformWithBufferHour(0.5)
+      ],
       queryFn: () => getBasicWeatherInformation(x, y)
     }),
     queryClient.prefetchQuery({
@@ -54,7 +62,7 @@ export const getStaticProps: GetStaticProps<{
         "getAstronomy",
         mountainData.lon,
         mountainData.lat,
-        dayjs().format("YYYYMMDD")
+        dayjs().utc().utcOffset(9).format("YYYYMMDD")
       ],
       queryFn: () =>
         getBasicAstronomyInformation(mountainData.lat, mountainData.lon)
