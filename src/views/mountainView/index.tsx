@@ -7,10 +7,7 @@ import {
 } from "@/entities/chart/ui";
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
-import {
-  getClientAstronomyInformation,
-  getClientWeatherInformation
-} from "@/shared/api/client";
+import { getClientWeatherInformation, getClientAstronomyInformation } from "@/shared/api/client";
 import type { Mountain } from "@/shared/constants";
 import {
   forecastUTC9TimeTransformWithBufferHour,
@@ -20,6 +17,7 @@ import AstronomyInfoCard from "@/views/mountainView/ui/AstronomyInfoCard";
 import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
 import { useQueries } from "@tanstack/react-query";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -36,6 +34,8 @@ import {
   XAxis,
   YAxis
 } from "recharts";
+
+dayjs.extend(utc);
 
 const LeafletMapWithNoSSR = dynamic(
   () => import("@/entities/map/ui/LeafletMap"),
@@ -89,7 +89,12 @@ const MountainView = ({ mountainData }: Props) => {
         queryFn: () => getClientWeatherInformation(x, y)
       },
       {
-        queryKey: ["getAstronomy", lon, lat, dayjs().format("YYYYMMDD")],
+        queryKey: [
+          "getAstronomy",
+          lon,
+          lat,
+          dayjs().utc().utcOffset(9).format("YYYYMMDD")
+        ],
         queryFn: () => getClientAstronomyInformation(lat, lon)
       }
     ]
