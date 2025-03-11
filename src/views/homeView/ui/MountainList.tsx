@@ -15,10 +15,10 @@ const MountainList = ({ mountainList }: Props) => {
             <Link href={`/mountain/${englishName}`}>
               <figure className="overflow-hidden rounded-lg bg-white shadow-md">
                 <Image
-                  className="h-[140px] rounded-lg object-cover"
+                  className="h-[140px] w-[226px] rounded-lg object-cover"
                   src={imageSrc}
                   alt={name}
-                  width={234}
+                  width={226}
                   height={140}
                 />
                 <div className="flex items-center gap-2 p-3">
