@@ -225,11 +225,7 @@ const MountainView = ({ mountainData }: Props) => {
           </ResponsiveContainer>
         )}
       </section>
-      {isAstronomyDataLoading ? (
-        <Skeleton height={56} />
-      ) : (
-        <AstronomyInfoCard astronomyData={astronomyData} />
-      )}
+      <AstronomyInfoCard astronomyData={astronomyData} />
       <CCTVExternalLink cctv={cctv} />
     </article>
   );
