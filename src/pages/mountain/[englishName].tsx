@@ -73,7 +73,7 @@ export const getStaticProps: GetStaticProps<{
     props: {
       mountainData,
       dehydratedState: dehydrate(queryClient),
-      revalidate: 3600
+      revalidate: 10800
     }
   };
 };
