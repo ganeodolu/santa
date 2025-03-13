@@ -7,7 +7,10 @@ import {
 } from "@/entities/chart/ui";
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
-import { getClientWeatherInformation, getClientAstronomyInformation } from "@/shared/api/client";
+import {
+  getClientAstronomyInformation,
+  getClientWeatherInformation
+} from "@/shared/api/client";
 import type { Mountain } from "@/shared/constants";
 import {
   forecastUTC9TimeTransformWithBufferHour,
@@ -19,7 +22,6 @@ import { useQueries } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -34,6 +36,7 @@ import {
   XAxis,
   YAxis
 } from "recharts";
+import MountainInformation from "./ui/MountainInformation";
 
 dayjs.extend(utc);
 
@@ -51,18 +54,7 @@ type Props = {
 
 const MountainView = ({ mountainData }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
-  const {
-    name,
-    lat,
-    lon,
-    height,
-    peak,
-    region,
-    imageSrc,
-    englishName,
-    cctv,
-    introduction
-  } = mountainData;
+  const { name, lat, lon, englishName, cctv } = mountainData;
   const { x, y } = xyConvert(lat, lon);
   const [
     {
@@ -121,35 +113,7 @@ const MountainView = ({ mountainData }: Props) => {
           </div>
         )}
       </section>
-      <section className="mb-4 flex">
-        <div className="w-[240px] overflow-hidden pr-4 pl-4">
-          <Image
-            className="h-[140px] rounded-lg object-cover"
-            src={imageSrc}
-            alt={name}
-            width={196}
-            height={140}
-          />
-        </div>
-        <div className="flex w-1/3 flex-col justify-center pl-4">
-          <h1 className="mb-2 text-2xl font-bold">{name}</h1>
-          <p className="mb-1">
-            높이:{" "}
-            <span className="font-semibold">
-              {height.toLocaleString("en-US")}m
-            </span>
-          </p>
-          <p className="mb-1">
-            지역: <span className="font-semibold">{region}</span>
-          </p>
-          <p className="mb-1">
-            주요봉: <span className="font-semibold">{peak}</span>
-          </p>
-        </div>
-      </section>
-      <section className="m-2">
-        <h3 className="pr-2 pl-2 text-justify text-sm">{introduction}</h3>
-      </section>
+      <MountainInformation mountainData={mountainData} />
       <section className="mb-4 rounded-lg bg-white">
         <h2 className="mb-2 text-center text-2xl font-bold">날씨</h2>
         {isWeatherDataLoading ? (
@@ -208,19 +172,6 @@ const MountainView = ({ mountainData }: Props) => {
                 fill="#3236a8"
                 name="강수확률 (%)"
               />
-              {/* <Bar
-              yAxisId="right"
-              dataKey="precipitation"
-              fill="#ffc658"
-              name="강수량 (mm)"
-            /> */}
-              {/* <Line
-              yAxisId="left"
-              type="monotone"
-              dataKey="WSD"
-              stroke="#ff7300"
-              name="풍속 (m/s)"
-            /> */}
             </ComposedChart>
           </ResponsiveContainer>
         )}
