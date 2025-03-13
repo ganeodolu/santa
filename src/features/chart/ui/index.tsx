@@ -5,45 +5,9 @@ import ShowerIcon from "@/shared/ui/icons/shower.svg";
 import SnowyIcon from "@/shared/ui/icons/snowy.svg";
 import SunnyIcon from "@/shared/ui/icons/sunny.svg";
 import TemperatureIcon from "@/shared/ui/icons/temperature.svg";
-import dayjs from "dayjs";
+import type { CustomizedDotProps } from "@/features/chart/model";
 import { TooltipProps } from "recharts";
-
-export const formatXAxis = (tickItem: string) => {
-  const hour = tickItem.slice(-4, -2);
-  if (hour === "00") {
-    return dayjs(tickItem).format("M/D");
-  }
-  if (hour === "06" || hour === "12" || hour === "18") {
-    return dayjs(tickItem).format("H시");
-  }
-
-  return "";
-};
-
-type PayloadProps = {
-  timestamp: string;
-  TMP: number;
-  SKY: number;
-  POP: number;
-  WSD: number;
-  PTY: number;
-};
-
-type CustomizedDotProps = {
-  cx: number;
-  cy: number;
-  dataKey: string;
-  fill: string;
-  height: number;
-  index: number;
-  name: string;
-  payload: PayloadProps;
-  r: number;
-  stroke: string;
-  strokeWidth: number;
-  value: number;
-  width: number;
-};
+import dayjs from "dayjs";
 
 export const CustomizedDot = (props: CustomizedDotProps) => {
   const { cx, cy, payload } = props;
@@ -127,9 +91,10 @@ export const CustomizedDot = (props: CustomizedDotProps) => {
 export const CustomTooltip = (props: TooltipProps<number, string>) => {
   const { active, payload } = props;
   if (active && payload?.length) {
-    const formatTime = dayjs(payload[0].payload.timestamp, "YYYYMMDDHHmm").format(
-      "MM월 DD일 A h시"
-    );
+    const formatTime = dayjs(
+      payload[0].payload.timestamp,
+      "YYYYMMDDHHmm"
+    ).format("MM월 DD일 A h시");
     return (
       <div className="rounded border bg-white p-2 shadow">
         <p>{`시간 : ${formatTime}`}</p>
@@ -139,30 +104,4 @@ export const CustomTooltip = (props: TooltipProps<number, string>) => {
     );
   }
   return <></>;
-};
-
-export type weatherDataProps = {
-  timestamp: string;
-  TMP: number;
-  SKY: number;
-  POP: number;
-  PTY: number;
-};
-
-export const generateYAxisTicks = (
-  data: weatherDataProps[],
-  dataType: keyof weatherDataProps,
-  offsetMin: number,
-  offsetMax: number
-) => {
-  const max = Math.max(...data.map((item) => item[dataType] as number));
-  const min = Math.min(...data.map((item) => item[dataType] as number));
-  const ticks = [];
-  for (let i = min + offsetMin; i <= max + offsetMax; i++) {
-    if (i % 5 === 0) {
-      ticks.push(i);
-    }
-  }
-
-  return ticks;
 };

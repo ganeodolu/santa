@@ -1,12 +1,6 @@
-import type { weatherDataProps } from "@/entities/chart/ui";
-import {
-  CustomTooltip,
-  CustomizedDot,
-  formatXAxis,
-  generateYAxisTicks
-} from "@/entities/chart/ui";
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
+import Chart from "@/features/chart";
 import {
   getClientAstronomyInformation,
   getClientWeatherInformation
@@ -25,17 +19,6 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import {
-  Bar,
-  CartesianGrid,
-  ComposedChart,
-  Legend,
-  Line,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis
-} from "recharts";
 import MountainInformation from "./ui/MountainInformation";
 
 dayjs.extend(utc);
@@ -119,61 +102,7 @@ const MountainView = ({ mountainData }: Props) => {
         {isWeatherDataLoading ? (
           <Skeleton height={200} />
         ) : (
-          <ResponsiveContainer width="100%" height={200}>
-            <ComposedChart data={weatherData}>
-              <CartesianGrid
-                horizontal={true}
-                vertical={true}
-                strokeDasharray="3 3"
-              />
-              <XAxis
-                dataKey="timestamp"
-                interval={0}
-                tickFormatter={formatXAxis}
-              />
-              <YAxis
-                type="number"
-                yAxisId="TMP"
-                domain={["dataMin - 10", "dataMax + 2"]}
-                interval={0}
-                ticks={generateYAxisTicks(
-                  weatherData as weatherDataProps[],
-                  "TMP",
-                  -5,
-                  2
-                )}
-                tick={{ fill: "#ee1b1b" }}
-                label={{ value: "°C", position: "insideTopLeft" }}
-                orientation="left"
-              />
-              <YAxis
-                yAxisId="POP"
-                domain={[0, 400]}
-                ticks={[0, 100]}
-                tick={{ fill: "#3236a8" }}
-                label={{ value: "%", position: "insideTopLeft" }}
-                orientation="right"
-              />
-              <Tooltip content={CustomTooltip} />
-              <Legend />
-              <Line
-                yAxisId="TMP"
-                type="monotone"
-                dataKey="TMP"
-                stroke="#ee1b1b"
-                name="기온 (°C)"
-                dot={CustomizedDot}
-                animationDuration={0}
-              />
-              <Bar
-                yAxisId="POP"
-                type="monotone"
-                dataKey="POP"
-                fill="#3236a8"
-                name="강수확률 (%)"
-              />
-            </ComposedChart>
-          </ResponsiveContainer>
+          <Chart weatherData={weatherData} />
         )}
       </section>
       <AstronomyInfoCard astronomyData={astronomyData} />
