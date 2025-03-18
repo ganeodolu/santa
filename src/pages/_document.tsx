@@ -5,6 +5,7 @@ export default function Document() {
   return (
     <Html lang="ko" className={`${pretendard.variable}`}>
       <Head>
+        <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>산타보아</title>
         <meta name="description" content="산타보아" />
