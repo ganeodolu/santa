@@ -54,6 +54,7 @@ const SearchResult = ({ searchResults }: Props) => {
                   alt={name}
                   width={60}
                   height={60}
+                  quality={30}
                 />
                 <span>
                   <h3 className="font-medium">{name}</h3>

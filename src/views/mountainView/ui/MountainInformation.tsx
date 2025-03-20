@@ -18,6 +18,7 @@ const MountainInformation = ({ mountainData }: Props) => {
             alt={name}
             width={196}
             height={140}
+            quality={50}
           />
         </div>
         <div className="flex w-1/3 flex-col justify-center pl-4">
