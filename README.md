@@ -6,7 +6,10 @@
   
 | 홈화면 | 검색 | 전국지도 | 산 정보 |
 |----------|----------|----------|----------|
-|![홈](https://github.com/user-attachments/assets/bc05f709-c4a2-435c-af90-b59be5273fcb)   | ![검색](https://github.com/user-attachments/assets/2b5aaefb-199b-4eb9-bfd6-e4ab1b8d3327)  |  ![전국지도](https://github.com/user-attachments/assets/f042e40b-e2de-4902-8de8-bc507efbb5a6)  |  ![산정보](https://github.com/user-attachments/assets/6da9de6c-ebfe-4e14-ba9c-38969bbe4a2c)  |
+|![홈](https://github.com/user-attachments/assets/bc05f709-c4a2-435c-af90-b59be5273fcb)   | ![검색](https://github.com/user-attachments/assets/2b5aaefb-199b-4eb9-bfd6-e4ab1b8d3327) | ![전국지도](https://github.com/user-attachments/assets/e70a965c-9627-48f8-b252-2a29d3fb2632) |  ![산정보](https://github.com/user-attachments/assets/6da9de6c-ebfe-4e14-ba9c-38969bbe4a2c)  |
+
+
+
 
 
 ## 2. 설치, 환경설정 및 실행 방법
@@ -39,6 +42,7 @@
     - [ ]  위치 표시
     - [ ]  산 정보
     - [ ]  날씨, 일출, 일몰 시간 표시
+    - [ ]  CCTV 링크
 
 ## 4. 사용한 프레임워크 및 라이브러리 설명
 
