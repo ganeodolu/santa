@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://santaboa.vercel.app/sitemap.xml
