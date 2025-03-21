@@ -1,40 +1,83 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ⛰️산타
 
-## Getting Started
+## 1. 최종 구현 화면 이미지
 
-First, run the development server:
+- 배포 : [santaboa.vercel.app](santaboa.vercel.app)
+  
+| 홈화면 | 검색 | 전국지도 | 산 정보 |
+|----------|----------|----------|----------|
+|![홈](https://github.com/user-attachments/assets/bc05f709-c4a2-435c-af90-b59be5273fcb)   | ![검색](https://github.com/user-attachments/assets/2b5aaefb-199b-4eb9-bfd6-e4ab1b8d3327)  |  ![전국지도](https://github.com/user-attachments/assets/f042e40b-e2de-4902-8de8-bc507efbb5a6)  |  ![산정보](https://github.com/user-attachments/assets/6da9de6c-ebfe-4e14-ba9c-38969bbe4a2c)  |
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 2. 설치, 환경설정 및 실행 방법
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- 환경변수 : 2가지 API Key 필요
+    - 공공데이터포털 (OPEN API)
+        - 날씨 : 기상청 단기예보 조회서비스
+        - 일출, 일몰시각 : 한국천문연구원 출몰시각 정보
+- 실행 방법
+    
+    ```bash
+    yarn install or npm install  // 라이브러리 설치
+    
+    yarn start or npm start   // 실행
+    ```
+    
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 3. 구현 요구 사항 목록
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- 홈
+    - [ ]  산 리스트
+- 검색
+    - [ ]  검색 기능
+    - [ ]  최근 검색어
+    - [ ]  검색 결과
+- 지도
+    - [ ]  전체 산 위치 및 이름 표시
+    - [ ]  위치 클러스터링
+- 산
+    - [ ]  위치 표시
+    - [ ]  산 정보
+    - [ ]  날씨, 일출, 일몰 시간 표시
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 4. 사용한 프레임워크 및 라이브러리 설명
 
-## Learn More
+- React
+- Next.js : ISR 정적페이지, 페이지 라우팅, image 최적화, vercel 배포 연동
+- TanStack Query : 서버 상태관리, 캐시 처리
+- React-Leaflet : 각 국립공원 위치 지도로 표시
+- Jotai : 최근 검색어 상태 관리 및 로컬스토리지 저장
+- TypeScript : 정적타입을 사용하여 안정적인 코드 작성
+- Tailwind CSS : className으로 스타일 지정
 
-To learn more about Next.js, take a look at the following resources:
+## 5. 폴더 구조 설명
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- app
+- pages : 라우팅, api
+- views(FSD의 pages와 동일 : next.js의 page router와 중복으로 이름 변경)
+- entities : 데이터와 렌더링
+- features : 사용자 행동과 데이터 변경
+- shared : 공통 유틸리티와 컴포넌트, API
+- 폴더 구조
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 6. 프로젝트 진행 시 주안점 작성
 
-## Deploy on Vercel
+- SSG
+    - getStaticProps로 pre-rendering
+- 지도
+- FSD 적용
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 7. 한계점 및 개선 사항 작성
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 한계점
+    - 컴포넌트 구조 분리
+        - FSD 각 위치, 분리와 통합의 경계
+    - Next.js의 App Router 미활용
+- 향후 넣고 싶은 기능
+    - 게시판
+    - 3D 산 지도
+    - 다른 API : 미세 먼지 등
+
+## 8. 후기
+
+-
