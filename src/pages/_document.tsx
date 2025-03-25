@@ -34,7 +34,6 @@ export default function Document() {
               description: "국립공원 산에 대한 모든 것",
               image: "https://santaboa.vercel.app/ogImage.png",
               url: "https://santaboa.vercel.app",
-              logo: "https://santaboa.vercel.app/favicon.ico"
             })
           }}
         />
