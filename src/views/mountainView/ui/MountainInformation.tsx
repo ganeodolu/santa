@@ -11,30 +11,46 @@ const MountainInformation = ({ mountainData }: Props) => {
   return (
     <>
       <section className="mb-4 flex">
-        <div className="w-[240px] overflow-hidden pr-4 pl-4">
+        <div className="w-[250px] overflow-hidden pr-4 pl-4">
           <Image
-            className="h-[140px] rounded-lg object-cover"
+            className="h-[150px] rounded-lg object-cover"
             src={imageSrc}
             alt={name}
-            width={196}
-            height={140}
+            width={210}
+            height={150}
             quality={50}
           />
         </div>
         <div className="flex w-1/3 flex-col justify-center pl-4">
-          <h1 className="mb-2 text-2xl font-bold">{name}</h1>
-          <p className="mb-1">
-            높이:{" "}
-            <span className="font-semibold">
-              {height.toLocaleString("en-US")}m
-            </span>
-          </p>
-          <p className="mb-1">
-            지역: <span className="font-semibold">{region}</span>
-          </p>
-          <p className="mb-1">
-            주요봉: <span className="font-semibold">{peak}</span>
-          </p>
+          <h1 className="mb-2 text-center text-2xl font-bold">{name}</h1>
+          <div className="grid grid-cols-2 gap-0">
+            <div className="border-none p-0.5 text-center">높이</div>
+            <div className="border-none p-0.5 text-center">
+              <span className="font-semibold">
+                {height.toLocaleString("en-US")}m
+              </span>
+            </div>
+            <div className="border-none p-0.5 text-center">지역</div>
+            <div className="border-none p-0.5 text-center">
+              <span className="font-semibold">{region}</span>
+            </div>
+            <div className="border-none p-0.5 text-center">주요봉</div>
+            <div className="border-none p-0.5 text-center">
+              <span className="font-semibold">{peak}</span>
+            </div>
+            <div className="border-none p-0.5 text-center">
+              <label htmlFor="visited">등산완료</label>
+            </div>
+            <div className="border-none p-0.5 text-center">
+              <input
+                id="visited"
+                type="checkbox"
+                name="visited"
+                className="h-5 w-5 rounded-full"
+                checked={true}
+              />
+            </div>
+          </div>
         </div>
       </section>
       <section className="m-2">
