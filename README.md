@@ -22,8 +22,10 @@
     
     ```bash
     yarn install or npm install  // 라이브러리 설치
+
+    yarn build or npm build      // 빌드
     
-    yarn start or npm start   // 실행
+    yarn start or npm start      // 실행
     ```
     
 
