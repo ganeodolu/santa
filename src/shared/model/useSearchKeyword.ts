@@ -1,7 +1,7 @@
 import type { Mountain } from "@/shared/constants";
 import { MOUNTAIN_INFORMATION_LIST } from "@/shared/constants";
 import { debounce } from "@/shared/lib";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useSearch = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -16,14 +16,17 @@ export const useSearch = () => {
         return true;
       }
     });
-
+    
     return results;
   };
 
-  const debouncedSearch = debounce((keyword: string) => {
-    const results = performSearch(keyword, MOUNTAIN_INFORMATION_LIST);
-    setSearchResults(results);
-  }, 500);
+  const debouncedSearch = useCallback(
+    debounce((keyword: string) => {
+      const results = performSearch(keyword, MOUNTAIN_INFORMATION_LIST);
+      setSearchResults(results);
+    }, 500),
+    []
+  );
 
   const handleChange = (keyword: string) => {
     setSearchKeyword(keyword);
