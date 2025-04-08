@@ -19,19 +19,19 @@ const MountainInformation = ({ mountainData }: Props) => {
   return (
     <>
       <section className="mb-4 flex">
-        <div className="w-[250px] overflow-hidden pr-4 pl-4">
+        <div className="w-[240px] overflow-hidden pr-4 pl-4">
           <Image
             className="h-[150px] rounded-lg object-cover"
             src={imageSrc}
             alt={name}
-            width={218}
+            width={208}
             height={150}
             quality={50}
           />
         </div>
-        <div className="flex flex-col flex-1 justify-center">
+        <div className="flex flex-col flex-1 items-center justify-center">
           <h1 className="mb-2 text-center text-2xl font-bold">{name}</h1>
-          <div className="grid grid-cols-2 gap-0">
+          <div className="grid grid-cols-2 gap-x-2">
             <div className="border-none p-0.5 text-center">높이</div>
             <div className="border-none p-0.5 text-center">
               <span className="font-semibold">
