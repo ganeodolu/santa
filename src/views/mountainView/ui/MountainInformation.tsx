@@ -1,4 +1,6 @@
 import type { Mountain } from "@/shared/constants";
+import { visitedMountainAtom } from "@/shared/lib/visitedStorage";
+import { useAtomValue, useSetAtom } from "jotai";
 import Image from "next/image";
 
 type Props = {
@@ -6,7 +8,13 @@ type Props = {
 };
 
 const MountainInformation = ({ mountainData }: Props) => {
-  const { name, height, peak, region, imageSrc, introduction } = mountainData;
+  const { name, englishName, height, peak, region, imageSrc, introduction } =
+    mountainData;
+  const visitedMountain = useAtomValue(visitedMountainAtom);
+  const toggleVisitedMountain = useSetAtom(visitedMountainAtom);
+  const handleCheck = (mountainEnglishName: string) => {
+    toggleVisitedMountain((prev) => ({ ...prev, [mountainEnglishName]: !prev[mountainEnglishName] }));
+  };
 
   return (
     <>
@@ -47,7 +55,8 @@ const MountainInformation = ({ mountainData }: Props) => {
                 type="checkbox"
                 name="visited"
                 className="h-5 w-5 rounded-full"
-                checked={true}
+                checked={visitedMountain[englishName]}
+                onChange={() => handleCheck(englishName)}
               />
             </div>
           </div>
