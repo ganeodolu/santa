@@ -24,12 +24,12 @@ const MountainInformation = ({ mountainData }: Props) => {
             className="h-[150px] rounded-lg object-cover"
             src={imageSrc}
             alt={name}
-            width={210}
+            width={218}
             height={150}
             quality={50}
           />
         </div>
-        <div className="flex w-1/3 flex-col justify-center pl-4">
+        <div className="flex flex-col flex-1 justify-center">
           <h1 className="mb-2 text-center text-2xl font-bold">{name}</h1>
           <div className="grid grid-cols-2 gap-0">
             <div className="border-none p-0.5 text-center">높이</div>
