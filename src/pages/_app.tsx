@@ -1,15 +1,7 @@
+import AppProviders from "@/app/provider";
 import "@/styles/globals.css";
-import {
-  QueryClient,
-  QueryClientProvider,
-  HydrationBoundary
-} from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Analytics } from "@vercel/analytics/react";
-import { Provider } from "jotai";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
-import { useState } from "react";
 import Head from "next/head";
 
 export const pretendard = localFont({
@@ -26,20 +18,6 @@ export const pretendard = localFont({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 1 * 60 * 60 * 1000, // 1시간
-            gcTime: 3 * 60 * 60 * 1000,
-            refetchOnWindowFocus: false,
-            retry: 1,
-          }
-        }
-      })
-  );
-
   return (
     <>
       <Head>
@@ -69,15 +47,9 @@ export default function App({ Component, pageProps }: AppProps) {
           content="235ecb1454555f77eb04694e10f586b73083908d"
         />
       </Head>
-      <QueryClientProvider client={queryClient}>
-        <HydrationBoundary state={pageProps.dehydratedState}>
-          <Provider>
-            <Component {...pageProps} />
-          </Provider>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </HydrationBoundary>
-      </QueryClientProvider>
-      <Analytics />
+      <AppProviders dehydratedState={pageProps.dehydratedState}>
+        <Component {...pageProps} />
+      </AppProviders>
     </>
   );
 }
