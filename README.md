@@ -69,7 +69,7 @@
 
 ## 6. 프로젝트 진행 시 주안점 작성
 
-- SSG
+- ISR(Incremental Static Regeneration) 적용
     - Next.js의getStaticProps와 prefetchQuery를 이용한 pre-rendering [링크](https://ganeo.notion.site/Next-js-Page-Router-Incremental-Static-Regeneration-ISR-1b671310639a805eb31bd59b45a9c8e3)
 - 지도
 - FSD 적용    
