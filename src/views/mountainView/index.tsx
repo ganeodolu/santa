@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import "react-loading-skeleton/dist/skeleton.css";
 import WeatherAndAstronomyData from "./ui/WeatherAndAstronomyData";
+import MountainInformation from "@/views/mountainView/ui/MountainInformation";
 
 dayjs.extend(utc);
 
@@ -51,6 +52,7 @@ const MountainView = ({ mountainData }: Props) => {
           </div>
         )}
       </section>
+      <MountainInformation mountainData={mountainData} />
       <ErrorBoundary fallback={<p>에러가 발생</p>}>
         <WeatherAndAstronomyData mountainData={mountainData} />
       </ErrorBoundary>

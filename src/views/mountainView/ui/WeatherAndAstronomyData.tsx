@@ -70,7 +70,6 @@ const WeatherAndAstronomyData = ({
 
   return (
     <>
-      <MountainInformation mountainData={mountainData} />
       <section className="mb-4 rounded-lg bg-white">
         <h2 className="mb-2 text-center text-2xl font-bold">날씨</h2>
         {isWeatherDataLoading ? (
