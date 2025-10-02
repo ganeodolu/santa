@@ -9,7 +9,6 @@ import {
   xyConvert
 } from "@/shared/model";
 import AstronomyInfoCard from "@/views/mountainView/ui/AstronomyInfoCard";
-import MountainInformation from "@/views/mountainView/ui/MountainInformation";
 import { useQueries } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -75,10 +74,12 @@ const WeatherAndAstronomyData = ({
         {isWeatherDataLoading ? (
           <Skeleton height={200} />
         ) : (
-          <Chart weatherData={weatherData} />
+          <Chart
+            weatherData={weatherData}
+          />
         )}
       </section>
-      <AstronomyInfoCard astronomyData={astronomyData} />
+      <AstronomyInfoCard astronomyData={astronomyData} isAstronomyDataLoading={isAstronomyDataLoading} />
     </>
   );
 };

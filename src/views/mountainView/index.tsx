@@ -1,7 +1,6 @@
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
 import type { Mountain } from "@/shared/constants";
-import { xyConvert } from "@/shared/model";
 import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
@@ -29,7 +28,6 @@ type Props = {
 const MountainView = ({ mountainData }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
   const { name, lat, lon, englishName, cctv } = mountainData;
-  const { x, y } = xyConvert(lat, lon);
 
   useEffect(() => {
     setIsMounted(true);
