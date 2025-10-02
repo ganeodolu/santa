@@ -1,3 +1,6 @@
+import { formatXAxis, generateYAxisTicks } from "@/features/chart/lib";
+import type { weatherDataProps } from "@/features/chart/model";
+import { CustomTooltip, CustomizedDot } from "@/features/chart/ui";
 import {
   Bar,
   CartesianGrid,
@@ -9,15 +12,12 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import type { weatherDataProps } from "@/features/chart/model";
-import { formatXAxis, generateYAxisTicks } from "@/features/chart/lib";
-import { CustomTooltip, CustomizedDot } from "@/features/chart/ui";
 
 type Props = {
   weatherData: weatherDataProps[];
 };
 
-const Chart = ({weatherData}: Props) => {
+const Chart = ({ weatherData }: Props) => {
   return (
     <ResponsiveContainer width="100%" height={200}>
       <ComposedChart data={weatherData}>
@@ -32,12 +32,7 @@ const Chart = ({weatherData}: Props) => {
           yAxisId="TMP"
           domain={["dataMin - 10", "dataMax + 2"]}
           interval={0}
-          ticks={generateYAxisTicks(
-            weatherData,
-            "TMP",
-            -5,
-            2
-          )}
+          ticks={generateYAxisTicks(weatherData, "TMP", -5, 2)}
           tick={{ fill: "#ee1b1b" }}
           label={{ value: "°C", position: "insideTopLeft" }}
           orientation="left"

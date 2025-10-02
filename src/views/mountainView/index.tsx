@@ -1,25 +1,15 @@
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
-import Chart from "@/features/chart";
-import {
-  getClientAstronomyInformation,
-  getClientWeatherInformation
-} from "@/shared/api/client";
 import type { Mountain } from "@/shared/constants";
-import {
-  forecastUTC9TimeTransformWithBufferHour,
-  xyConvert
-} from "@/shared/model";
-import AstronomyInfoCard from "@/views/mountainView/ui/AstronomyInfoCard";
+import { xyConvert } from "@/shared/model";
 import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
-import { useQueries } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
+import { ErrorBoundary } from "react-error-boundary";
 import "react-loading-skeleton/dist/skeleton.css";
-import MountainInformation from "./ui/MountainInformation";
+import WeatherAndAstronomyData from "./ui/WeatherAndAstronomyData";
 
 dayjs.extend(utc);
 
@@ -39,41 +29,6 @@ const MountainView = ({ mountainData }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
   const { name, lat, lon, englishName, cctv } = mountainData;
   const { x, y } = xyConvert(lat, lon);
-  const [
-    {
-      data: weatherData,
-      isError: isWeatherDataError,
-      isLoading: isWeatherDataLoading,
-      error: weatherDataError
-    },
-    {
-      data: astronomyData,
-      isError: isAstronomyDataError,
-      isLoading: isAstronomyDataLoading,
-      error: astronomyDataError
-    }
-  ] = useQueries({
-    queries: [
-      {
-        queryKey: [
-          "getWeather",
-          x,
-          y,
-          forecastUTC9TimeTransformWithBufferHour(0.5)
-        ],
-        queryFn: () => getClientWeatherInformation(x, y)
-      },
-      {
-        queryKey: [
-          "getAstronomy",
-          lon,
-          lat,
-          dayjs().utc().utcOffset(9).format("YYYYMMDD")
-        ],
-        queryFn: () => getClientAstronomyInformation(lat, lon)
-      }
-    ]
-  });
 
   useEffect(() => {
     setIsMounted(true);
@@ -96,16 +51,9 @@ const MountainView = ({ mountainData }: Props) => {
           </div>
         )}
       </section>
-      <MountainInformation mountainData={mountainData} />
-      <section className="mb-4 rounded-lg bg-white">
-        <h2 className="mb-2 text-center text-2xl font-bold">날씨</h2>
-        {isWeatherDataLoading ? (
-          <Skeleton height={200} />
-        ) : (
-          <Chart weatherData={weatherData} />
-        )}
-      </section>
-      <AstronomyInfoCard astronomyData={astronomyData} />
+      <ErrorBoundary fallback={<p>에러가 발생</p>}>
+        <WeatherAndAstronomyData mountainData={mountainData} />
+      </ErrorBoundary>
       <CCTVExternalLink cctv={cctv} />
     </article>
   );
