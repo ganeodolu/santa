@@ -2,7 +2,7 @@
 소개 : 국립공원 산에 대한 모든 것(산 검색, 위치, 날씨, 일출, 일몰, CCTV 등) 
 ## 1. 최종 구현 화면 이미지
 
-- 배포 : [santaboa.vercel.app](santaboa.vercel.app)
+- 배포 : [https://santaboa.vercel.app](https://santaboa.vercel.app)
   
 | 홈화면 | 검색 | 전국지도 | 산 정보 |
 |----------|----------|----------|----------|
