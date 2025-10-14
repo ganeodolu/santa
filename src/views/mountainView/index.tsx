@@ -1,15 +1,16 @@
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
 import type { Mountain } from "@/shared/constants";
+import AstronomyInfoCardQuery from "@/views/mountainView/ui/AstronomyInfoCardQuery";
 import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
+import MountainInformation from "@/views/mountainView/ui/MountainInformation";
+import WeatherChartQuery from "@/views/mountainView/ui/WeatherChartQuery";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary, type FallbackProps } from "react-error-boundary";
 import "react-loading-skeleton/dist/skeleton.css";
-import WeatherAndAstronomyData from "./ui/WeatherAndAstronomyData";
-import MountainInformation from "@/views/mountainView/ui/MountainInformation";
 
 dayjs.extend(utc);
 
@@ -23,6 +24,24 @@ const LeafletMapWithNoSSR = dynamic(
 
 type Props = {
   mountainData: Mountain;
+};
+
+const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
+  return (
+    <div
+      role="alert"
+      className="flex h-[200px] w-full flex-col items-center justify-center rounded bg-red-100 p-5 font-bold text-red-700"
+    >
+      <p>차트 렌더링 중 오류가 발생했습니다.</p>
+      <pre className="whitespace-normal">{error.message}</pre>
+      <button
+        onClick={resetErrorBoundary}
+        className="mt-4 cursor-pointer rounded bg-red-700 px-3 py-1.5 text-white transition hover:bg-red-800"
+      >
+        재시도
+      </button>
+    </div>
+  );
 };
 
 const MountainView = ({ mountainData }: Props) => {
@@ -51,9 +70,15 @@ const MountainView = ({ mountainData }: Props) => {
         )}
       </section>
       <MountainInformation mountainData={mountainData} />
-      <ErrorBoundary fallback={<p>에러가 발생</p>}>
-        <WeatherAndAstronomyData mountainData={mountainData} />
-      </ErrorBoundary>
+      <section className="mb-4 rounded-lg bg-white">
+        <h2 className="mb-2 text-center text-2xl font-bold">날씨</h2>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <WeatherChartQuery mountainData={mountainData} />
+        </ErrorBoundary>
+        <ErrorBoundary fallback={<p></p>}>
+          <AstronomyInfoCardQuery mountainData={mountainData} />
+        </ErrorBoundary>
+      </section>
       <CCTVExternalLink cctv={cctv} />
     </article>
   );
