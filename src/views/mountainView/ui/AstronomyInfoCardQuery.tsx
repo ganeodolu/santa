@@ -27,7 +27,6 @@ const AstronomyInfoCardQuery = ({ mountainData }: { mountainData: Mountain }) =>
   });
 
   if (isAstronomyDataError) {
-    console.log(astronomyDataError);
     throw astronomyDataError;
   }
 
