@@ -1,6 +1,7 @@
 import MapSkeleton from "@/entities/map/ui/MapSkeleton";
 import SearchHeaderWithBackNoFunction from "@/features/Header/ui/SearchHeaderWithBackNoFunction";
 import type { Mountain } from "@/shared/constants";
+import type { MountainData } from "@/shared/model";
 import AstronomyInfoCardQuery from "@/views/mountainView/ui/AstronomyInfoCardQuery";
 import CCTVExternalLink from "@/views/mountainView/ui/CCTVExternalLink";
 import MountainInformation from "@/views/mountainView/ui/MountainInformation";
@@ -22,10 +23,6 @@ const LeafletMapWithNoSSR = dynamic(
   }
 );
 
-type Props = {
-  mountainData: Mountain;
-};
-
 const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   return (
     <div
@@ -44,7 +41,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   );
 };
 
-const MountainView = ({ mountainData }: Props) => {
+const MountainView = ({ mountainData }: MountainData) => {
   const [isMounted, setIsMounted] = useState(false);
   const { name, lat, lon, englishName, cctv } = mountainData;
 

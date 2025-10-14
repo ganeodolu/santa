@@ -2,6 +2,7 @@ import { AxiosInstance } from "axios";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import utc from "dayjs/plugin/utc";
+import type { Mountain } from "@/shared/constants";
 
 dayjs.extend(customParseFormat);
 dayjs.extend(utc);
@@ -199,4 +200,8 @@ export const extractAstronomyData = async (
     sunrise: dayjs(sunrise.trim(), "HHmm").format("A hh:mm"),
     sunset: dayjs(sunset.trim(), "HHmm").format("A hh:mm")
   };
+};
+
+export type MountainData = {
+  mountainData: Mountain;
 };

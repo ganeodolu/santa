@@ -2,7 +2,6 @@ import {
   getBasicWeatherInformation,
   getBasicAstronomyInformation
 } from "@/shared/api/basic";
-import type { Mountain } from "@/shared/constants";
 import { MOUNTAIN_INFORMATION_LIST, MOUNTAIN_KEYS } from "@/shared/constants";
 import { forecastUTC9TimeTransformWithBufferHour, xyConvert } from "@/shared/model";
 import MountainView from "@/views/mountainView";
@@ -10,14 +9,11 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { GetStaticPaths, GetStaticProps } from "next";
 import utc from "dayjs/plugin/utc";
+import type { MountainData } from "@/shared/model";
 
 dayjs.extend(utc);
 
-interface MountainPageProps {
-  mountainData: Mountain;
-}
-
-const MountainPage: React.FC<MountainPageProps> = ({ mountainData }) => {
+const MountainPage: React.FC<MountainData> = ({ mountainData }) => {
   return (
     <div className="min-h-screen bg-gray-100">
       <MountainView mountainData={mountainData} />
@@ -33,9 +29,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps<{
-  mountainData: Mountain;
-}> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<MountainData> = async ({ params }) => {
   const mountainData = MOUNTAIN_INFORMATION_LIST.find(
     (mountain) => mountain.englishName === params?.englishName
   );

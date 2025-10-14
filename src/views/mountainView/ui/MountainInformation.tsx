@@ -1,13 +1,9 @@
-import type { Mountain } from "@/shared/constants";
 import { visitedMountainAtom } from "@/shared/lib/visitedStorage";
 import { useAtomValue, useSetAtom } from "jotai";
 import Image from "next/image";
+import type { MountainData } from "@/shared/model";
 
-type Props = {
-  mountainData: Mountain;
-};
-
-const MountainInformation = ({ mountainData }: Props) => {
+const MountainInformation = ({ mountainData }: MountainData ) => {
   const { name, englishName, height, peak, region, imageSrc, introduction } =
     mountainData;
   const visitedMountain = useAtomValue(visitedMountainAtom);

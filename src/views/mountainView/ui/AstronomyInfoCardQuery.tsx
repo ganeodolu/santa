@@ -1,15 +1,15 @@
 import SunriseIcon from "@/shared/ui/icons/sunrise.svg";
 import SunsetIcon from "@/shared/ui/icons/sunset.svg";
 import Skeleton from "react-loading-skeleton";
-import type { Mountain } from "@/shared/constants";
 import { getClientAstronomyInformation } from "@/shared/api/client";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import type { MountainData } from "@/shared/model";
 
 dayjs.extend(utc);
 
-const AstronomyInfoCardQuery = ({ mountainData }: { mountainData: Mountain }) => {
+const AstronomyInfoCardQuery = ({ mountainData }: MountainData ) => {
   const { lat, lon } = mountainData;
   const {
     data: astronomyData,
