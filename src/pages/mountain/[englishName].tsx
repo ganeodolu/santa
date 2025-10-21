@@ -10,14 +10,22 @@ import dayjs from "dayjs";
 import { GetStaticPaths, GetStaticProps } from "next";
 import utc from "dayjs/plugin/utc";
 import type { MountainData } from "@/shared/model";
+import { ReactNode, ReactElement } from "react";
+import GlobalLayout from "@/app/ui/GlobalLayout";
+import type { NextPage } from "next";
+import MountainViewLayout from "@/views/mountainView/ui/MountainViewLayout";
+
+type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => React.ReactNode;
+};
 
 dayjs.extend(utc);
 
-const MountainPage: React.FC<MountainData> = ({ mountainData }) => {
+const MountainPage: NextPageWithLayout<MountainData> = ({ mountainData }) => {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <MountainViewLayout>
       <MountainView mountainData={mountainData} />
-    </div>
+    </MountainViewLayout>
   );
 };
 
@@ -71,5 +79,7 @@ export const getStaticProps: GetStaticProps<MountainData> = async ({ params }) =
     }
   };
 };
+
+MountainPage.getLayout = (page: ReactNode) => <GlobalLayout>{page}</GlobalLayout>;
 
 export default MountainPage;

@@ -50,7 +50,7 @@ const MountainView = ({ mountainData }: MountainData) => {
   }, []);
 
   return (
-    <article className="container mx-auto max-w-[500px] bg-white shadow-md">
+    <>
       <SearchHeaderWithBackNoFunction href={"/search"} />
       <section className="mb-4">
         {isMounted && (
@@ -77,7 +77,7 @@ const MountainView = ({ mountainData }: MountainData) => {
         </ErrorBoundary>
       </section>
       <CCTVExternalLink cctv={cctv} />
-    </article>
+    </>
   );
 };
 
