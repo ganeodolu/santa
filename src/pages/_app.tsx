@@ -1,8 +1,14 @@
 import AppProviders from "@/app/provider";
 import "@/styles/globals.css";
+import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
 import Head from "next/head";
+import type { ReactElement, ReactNode } from "react";
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
 
 export const pretendard = localFont({
   src: [
@@ -17,7 +23,13 @@ export const pretendard = localFont({
   display: "swap"
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <>
       <Head>
@@ -48,7 +60,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <AppProviders dehydratedState={pageProps.dehydratedState}>
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </AppProviders>
     </>
   );

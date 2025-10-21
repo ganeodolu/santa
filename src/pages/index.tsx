@@ -1,8 +1,11 @@
+import GlobalLayout from "@/app/ui/GlobalLayout";
 import HomeView from "@/views/homeView";
+import { ReactNode } from "react";
+import HomeViewLayout from './../views/homeView/ui/HomeViewLayout';
 
 export default function IndexPage() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <HomeViewLayout>
       <HomeView />
       <script
         type="application/ld+json"
@@ -18,6 +21,8 @@ export default function IndexPage() {
           })
         }}
       />
-    </div>
+    </HomeViewLayout>  
   );
 }
+
+IndexPage.getLayout = (page: ReactNode) => <GlobalLayout>{page}</GlobalLayout>

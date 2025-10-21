@@ -5,11 +5,11 @@ import ShowMapButton from "@/views/homeView/ui/ShowMapButton";
 
 const HomeView = () => {
   return (
-    <div className="mx-auto max-w-[500px] bg-white shadow-md">
+    <>
       <SearchStickyHeader href={"/search"} />
       <MountainList mountainList={MOUNTAIN_INFORMATION_LIST} />
       <ShowMapButton href={"/mountainMap"} />
-    </div>
+      </>
   );
 };
 
