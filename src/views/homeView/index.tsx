@@ -9,7 +9,7 @@ const HomeView = () => {
       <SearchStickyHeader href={"/search"} />
       <MountainList mountainList={MOUNTAIN_INFORMATION_LIST} />
       <ShowMapButton href={"/mountainMap"} />
-      </>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ const SearchView = () => {
   const { searchKeyword, searchResults, handleChange } = useSearch();
 
   return (
-    <div className="mx-auto max-w-[500px] rounded-lg bg-white shadow-md">
+    <>
       <SearchStickyHeaderWithBack
         searchKeyword={searchKeyword}
         onChange={handleChange}
@@ -16,7 +16,7 @@ const SearchView = () => {
         <RecentKeyword />
         <SearchResult searchResults={searchResults} />
       </section>
-    </div>
+    </>
   );
 };
 

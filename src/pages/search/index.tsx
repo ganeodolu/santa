@@ -1,12 +1,16 @@
-import SearchView from '@/views/searchView'
-import React from 'react'
+import GlobalLayout from "@/app/ui/GlobalLayout";
+import SearchView from "@/views/searchView";
+import SearchViewLayout from "@/views/searchView/ui/SearchViewLayout";
+import { ReactNode } from "react";
 
-const Search = () => {
+const SearchPage = () => {
   return (
-    <div className={`bg-gray-100`}>
+    <SearchViewLayout>
       <SearchView />
-    </div>
+    </SearchViewLayout>
   );
-}
+};
 
-export default Search
+SearchPage.getLayout = (page: ReactNode) => <GlobalLayout>{page}</GlobalLayout>;
+
+export default SearchPage;
