@@ -40,7 +40,7 @@ const MountainMapView = () => {
   }, []);
 
   return (
-    <div className="mx-auto max-w-[500px] bg-white shadow-md">
+    <>
       <SearchStickyHeaderWithBackNoFunction href={"/search"} />
       <section className="mb-4">
         {isMounted && (
@@ -61,7 +61,7 @@ const MountainMapView = () => {
         )}
       </section>
       {mountainInfo && <MountainInfoBar mountainInfo={mountainInfo} />}
-    </div>
+    </>
   );
 };
 
