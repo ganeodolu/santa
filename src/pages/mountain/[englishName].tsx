@@ -1,19 +1,21 @@
+import GlobalLayout from "@/app/ui/GlobalLayout";
 import {
-  getBasicWeatherInformation,
-  getBasicAstronomyInformation
+  getBasicAstronomyInformation,
+  getBasicWeatherInformation
 } from "@/shared/api/basic";
 import { MOUNTAIN_INFORMATION_LIST, MOUNTAIN_KEYS } from "@/shared/constants";
-import { forecastUTC9TimeTransformWithBufferHour, xyConvert } from "@/shared/model";
+import type { MountainData } from "@/shared/model";
+import {
+  forecastUTC9TimeTransformWithBufferHour,
+  xyConvert
+} from "@/shared/model";
 import MountainView from "@/views/mountainView";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import dayjs from "dayjs";
-import { GetStaticPaths, GetStaticProps } from "next";
 import utc from "dayjs/plugin/utc";
-import type { MountainData } from "@/shared/model";
-import { ReactNode, ReactElement } from "react";
-import GlobalLayout from "@/app/ui/GlobalLayout";
 import type { NextPage } from "next";
-import MountainViewLayout from "@/views/mountainView/ui/MountainViewLayout";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { ReactElement, ReactNode } from "react";
 
 type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => React.ReactNode;
@@ -22,11 +24,7 @@ type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 dayjs.extend(utc);
 
 const MountainPage: NextPageWithLayout<MountainData> = ({ mountainData }) => {
-  return (
-    <MountainViewLayout>
-      <MountainView mountainData={mountainData} />
-    </MountainViewLayout>
-  );
+  return <MountainView mountainData={mountainData} />;
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -37,7 +35,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps<MountainData> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<MountainData> = async ({
+  params
+}) => {
   const mountainData = MOUNTAIN_INFORMATION_LIST.find(
     (mountain) => mountain.englishName === params?.englishName
   );
@@ -80,6 +80,8 @@ export const getStaticProps: GetStaticProps<MountainData> = async ({ params }) =
   };
 };
 
-MountainPage.getLayout = (page: ReactNode) => <GlobalLayout>{page}</GlobalLayout>;
+MountainPage.getLayout = (page: ReactNode) => (
+  <GlobalLayout>{page}</GlobalLayout>
+);
 
 export default MountainPage;

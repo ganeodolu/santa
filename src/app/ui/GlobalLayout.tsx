@@ -7,9 +7,11 @@ type Props = {
 const GlobalLayout = ({children} : Props) => {
   return (
     <div className="min-h-screen bg-gray-100">
-      {children}
+      <main className="mx-auto max-w-[500px] bg-white shadow-md">
+        {children}
+      </main>
     </div>
-  )
+  );
 }
 
 export default GlobalLayout

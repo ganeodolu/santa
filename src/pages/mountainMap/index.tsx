@@ -1,14 +1,9 @@
-import MountainMapView from "@/views/mountainMapView";
 import GlobalLayout from "@/app/ui/GlobalLayout";
+import MountainMapView from "@/views/mountainMapView";
 import { ReactNode } from "react";
-import MountainMapViewLayout from "@/views/mountainMapView/ui/MountainMapViewLayout";
 
 const MountainMapPage = () => {
-  return (
-    <MountainMapViewLayout>
-      <MountainMapView />
-    </MountainMapViewLayout>
-  );
+  return <MountainMapView />;
 };
 
 MountainMapPage.getLayout = (page: ReactNode) => (
