@@ -1,6 +1,4 @@
-import GlobalLayout from "@/app/ui/GlobalLayout";
 import HomeView from "@/views/homeView";
-import { ReactNode } from "react";
 
 export default function IndexPage() {
   return (
@@ -23,5 +21,3 @@ export default function IndexPage() {
     </>
   );
 }
-
-IndexPage.getLayout = (page: ReactNode) => <GlobalLayout>{page}</GlobalLayout>;

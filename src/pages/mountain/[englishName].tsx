@@ -1,4 +1,3 @@
-import GlobalLayout from "@/app/ui/GlobalLayout";
 import {
   getBasicAstronomyInformation,
   getBasicWeatherInformation
@@ -79,9 +78,5 @@ export const getStaticProps: GetStaticProps<MountainData> = async ({
     }
   };
 };
-
-MountainPage.getLayout = (page: ReactNode) => (
-  <GlobalLayout>{page}</GlobalLayout>
-);
 
 export default MountainPage;
