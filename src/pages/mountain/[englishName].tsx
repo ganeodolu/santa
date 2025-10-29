@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import type { NextPage } from "next";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement } from "react";
 
 type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => React.ReactNode;

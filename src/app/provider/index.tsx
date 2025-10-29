@@ -25,7 +25,7 @@ export default function AppProviders({
             staleTime: 1 * 60 * 60 * 1000, // 1시간
             gcTime: 3 * 60 * 60 * 1000,
             refetchOnWindowFocus: false,
-            retry: 1
+            retry: false
           }
         }
       })
