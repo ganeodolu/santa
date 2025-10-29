@@ -2,20 +2,24 @@ import {
   getBasicAstronomyInformation,
   getBasicWeatherInformation
 } from "@/shared/api/basic";
-import { DEFAULT_URL, MOUNTAIN_INFORMATION_LIST, MOUNTAIN_KEYS, Mountain } from "@/shared/constants";
-import type { MountainData } from "@/shared/model";
+import {
+  DEFAULT_URL,
+  MOUNTAIN_INFORMATION_LIST,
+  MOUNTAIN_KEYS,
+  Mountain
+} from "@/shared/constants";
 import {
   forecastUTC9TimeTransformWithBufferHour,
   xyConvert
 } from "@/shared/model";
+import MetaTags from "@/shared/ui/MetaTags";
 import MountainView from "@/views/mountainView";
-import { QueryClient, dehydrate, DehydratedState } from "@tanstack/react-query";
+import { DehydratedState, QueryClient, dehydrate } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import type { NextPage } from "next";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ReactElement } from "react";
-import MetaTags from "@/shared/ui/MetaTags";
 
 type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => React.ReactNode;
@@ -27,7 +31,6 @@ type MountainPageProps = {
   mountainData: Mountain;
   dehydratedState: DehydratedState;
 };
-
 
 const MountainPage: NextPageWithLayout<MountainPageProps> = ({
   mountainData
