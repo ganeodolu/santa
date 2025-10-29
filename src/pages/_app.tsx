@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <MetaTags
         title="산타보아"
         description="국립공원 산에 대한 모든 것! 18개 산악형 국립공원의 지도, 날씨, 일출, 일몰, CCTV 정보를 알려드립니다."
-        keywords="산타보아, 국립공원, 산, 날씨, 위치, 지도, mountain"
+        keywords="산타보아, 국립공원, 산, 날씨, 위치, 지도, CCTV"
       />
       <Head>
         <meta property="og:site_name" content="SANTABOA" />

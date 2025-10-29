@@ -2,7 +2,7 @@ import {
   getBasicAstronomyInformation,
   getBasicWeatherInformation
 } from "@/shared/api/basic";
-import { MOUNTAIN_INFORMATION_LIST, MOUNTAIN_KEYS } from "@/shared/constants";
+import { DEFAULT_URL, MOUNTAIN_INFORMATION_LIST, MOUNTAIN_KEYS } from "@/shared/constants";
 import type { MountainData } from "@/shared/model";
 import {
   forecastUTC9TimeTransformWithBufferHour,
@@ -15,6 +15,7 @@ import utc from "dayjs/plugin/utc";
 import type { NextPage } from "next";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ReactElement } from "react";
+import MetaTags from "@/shared/ui/MetaTags";
 
 type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => React.ReactNode;
@@ -23,7 +24,17 @@ type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 dayjs.extend(utc);
 
 const MountainPage: NextPageWithLayout<MountainData> = ({ mountainData }) => {
-  return <MountainView mountainData={mountainData} />;
+  return (
+    <>
+      <MetaTags
+        title={`${mountainData?.name} 국립공원`}
+        description={`${mountainData?.name}의 지도, 날씨, 일출, 일몰, CCTV 정보`}
+        keywords={`${mountainData?.name}, 국립공원, 산, 날씨, 위치, 지도, CCTV`}
+        url={`${DEFAULT_URL}/mountain/${mountainData?.englishName}`}
+      />
+      <MountainView mountainData={mountainData} />;
+    </>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

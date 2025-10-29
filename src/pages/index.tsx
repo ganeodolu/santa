@@ -1,8 +1,14 @@
+import MetaTags from "@/shared/ui/MetaTags";
 import HomeView from "@/views/homeView";
 
 export default function IndexPage() {
   return (
     <>
+      <MetaTags
+        title={`전국 산악형 국립공원 18곳`}
+        description={"전국에 있는 국립공원을 모두 알아보세요"}
+        keywords={`국립공원, 산, 날씨, 위치, 지도, CCTV`}
+      />
       <HomeView />
       <script
         type="application/ld+json"
