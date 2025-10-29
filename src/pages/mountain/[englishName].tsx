@@ -2,14 +2,14 @@ import {
   getBasicAstronomyInformation,
   getBasicWeatherInformation
 } from "@/shared/api/basic";
-import { DEFAULT_URL, MOUNTAIN_INFORMATION_LIST, MOUNTAIN_KEYS } from "@/shared/constants";
+import { DEFAULT_URL, MOUNTAIN_INFORMATION_LIST, MOUNTAIN_KEYS, Mountain } from "@/shared/constants";
 import type { MountainData } from "@/shared/model";
 import {
   forecastUTC9TimeTransformWithBufferHour,
   xyConvert
 } from "@/shared/model";
 import MountainView from "@/views/mountainView";
-import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { QueryClient, dehydrate, DehydratedState } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import type { NextPage } from "next";
@@ -23,7 +23,15 @@ type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 
 dayjs.extend(utc);
 
-const MountainPage: NextPageWithLayout<MountainData> = ({ mountainData }) => {
+type MountainPageProps = {
+  mountainData: Mountain;
+  dehydratedState: DehydratedState;
+};
+
+
+const MountainPage: NextPageWithLayout<MountainPageProps> = ({
+  mountainData
+}) => {
   return (
     <>
       <MetaTags
@@ -45,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps<MountainData> = async ({
+export const getStaticProps: GetStaticProps<MountainPageProps> = async ({
   params
 }) => {
   const mountainData = MOUNTAIN_INFORMATION_LIST.find(
@@ -88,9 +96,9 @@ export const getStaticProps: GetStaticProps<MountainData> = async ({
   return {
     props: {
       mountainData,
-      dehydratedState: dehydrate(queryClient),
-      revalidate: 10800
-    }
+      dehydratedState: dehydrate(queryClient)
+    },
+    revalidate: 10800
   };
 };
 
