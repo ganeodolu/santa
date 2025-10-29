@@ -59,27 +59,31 @@ export const getStaticProps: GetStaticProps<MountainData> = async ({
   const { x, y } = xyConvert(mountainData?.lat, mountainData?.lon);
   const queryClient = new QueryClient();
 
-  await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: [
-        "getWeather",
-        x,
-        y,
-        forecastUTC9TimeTransformWithBufferHour(0.5)
-      ],
-      queryFn: () => getBasicWeatherInformation(x, y)
-    }),
-    queryClient.prefetchQuery({
-      queryKey: [
-        "getAstronomy",
-        mountainData.lon,
-        mountainData.lat,
-        dayjs().utc().utcOffset(9).format("YYYYMMDD")
-      ],
-      queryFn: () =>
-        getBasicAstronomyInformation(mountainData.lat, mountainData.lon)
-    })
-  ]);
+  try {
+    await Promise.all([
+      queryClient.prefetchQuery({
+        queryKey: [
+          "getWeather",
+          x,
+          y,
+          forecastUTC9TimeTransformWithBufferHour(0.5)
+        ],
+        queryFn: () => getBasicWeatherInformation(x, y)
+      }),
+      queryClient.prefetchQuery({
+        queryKey: [
+          "getAstronomy",
+          mountainData.lon,
+          mountainData.lat,
+          dayjs().utc().utcOffset(9).format("YYYYMMDD")
+        ],
+        queryFn: () =>
+          getBasicAstronomyInformation(mountainData.lat, mountainData.lon)
+      })
+    ]);
+  } catch (error) {
+    console.error(error);
+  }
 
   return {
     props: {
