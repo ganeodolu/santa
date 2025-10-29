@@ -5,8 +5,8 @@ export default function IndexPage() {
   return (
     <>
       <MetaTags
-        title={`전국 산악형 국립공원 18곳`}
-        description={"전국에 있는 국립공원을 모두 알아보세요"}
+        title={`산타보아 | 국립공원 가이드`}
+        description={"전국에 있는 산악형 국립공원 18곳을 모두 알아보세요"}
         keywords={`국립공원, 산, 날씨, 위치, 지도, CCTV`}
       />
       <HomeView />
