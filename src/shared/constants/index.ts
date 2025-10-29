@@ -54,6 +54,23 @@ export const MOUNTAIN_KEYS = [
   "halla"
 ];
 
+export const DEFAULT_KEYWORDS = "산타보아, 국립공원, 산, 날씨, 위치, 지도, mountain"
+
+export const DEFAULT_OG_IMAGE = "/ogImage.png";
+
+export const DEFAULT_OG_TYPE = "website"; 
+
+export const DEFAULT_URL = "https://santaboa.vercel.app";
+
+export type MetaTags = {
+  title: string;
+  description: string;
+  keywords?: string;
+  ogImage?: string;
+  ogType?: string;
+  url?: string;
+};
+
 export interface Mountain {
   name: string;
   englishName: string;
