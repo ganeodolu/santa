@@ -18,7 +18,7 @@ export default function IndexPage() {
             "@type": "WebSite",
             name: "산타보아",
             alternativeName: "SANTABOA",
-            description: "산타보아 | 국립공원 산에 대한 모든 것",
+            description: "산타보아 | 국립공원 가이드",
             image: "https://santaboa.vercel.app/ogImage.png",
             url: "https://santaboa.vercel.app"
           })
