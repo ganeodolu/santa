@@ -38,10 +38,10 @@ const MountainPage: NextPageWithLayout<MountainPageProps> = ({
   return (
     <>
       <MetaTags
-        title={`${mountainData?.name} 국립공원`}
-        description={`${mountainData?.name}의 지도, 날씨, 일출, 일몰, CCTV 정보`}
-        keywords={`${mountainData?.name}, 국립공원, 산, 날씨, 위치, 지도, CCTV`}
-        url={`${DEFAULT_URL}/mountain/${mountainData?.englishName}`}
+        title={`${mountainData.name} 국립공원`}
+        description={`${mountainData.name}의 지도, 날씨, 일출, 일몰, CCTV 정보`}
+        keywords={`${mountainData.name}, 국립공원, 산, 날씨, 위치, 지도, CCTV`}
+        url={`${DEFAULT_URL}/mountain/${mountainData.englishName}`}
       />
       <MountainView mountainData={mountainData} />;
     </>
@@ -70,31 +70,42 @@ export const getStaticProps: GetStaticProps<MountainPageProps> = async ({
   const { x, y } = xyConvert(mountainData?.lat, mountainData?.lon);
   const queryClient = new QueryClient();
 
-  try {
-    await Promise.all([
-      queryClient.prefetchQuery({
-        queryKey: [
-          "getWeather",
-          x,
-          y,
-          forecastUTC9TimeTransformWithBufferHour(0.5)
-        ],
-        queryFn: () => getBasicWeatherInformation(x, y)
-      }),
-      queryClient.prefetchQuery({
-        queryKey: [
-          "getAstronomy",
-          mountainData.lon,
-          mountainData.lat,
-          dayjs().utc().utcOffset(9).format("YYYYMMDD")
-        ],
-        queryFn: () =>
-          getBasicAstronomyInformation(mountainData.lat, mountainData.lon)
-      })
-    ]);
-  } catch (error) {
-    console.error(error);
-  }
+  const weatherQueryKey = [
+    "getWeather",
+    x,
+    y,
+    forecastUTC9TimeTransformWithBufferHour(0.5)
+  ];
+  const astronomyQueryKey = [
+    "getAstronomy",
+    mountainData.lon,
+    mountainData.lat,
+    dayjs().utc().utcOffset(9).format("YYYYMMDD")
+  ];
+
+  const weatherPrefetch = queryClient
+    .prefetchQuery({
+      queryKey: weatherQueryKey,
+      queryFn: () => getBasicWeatherInformation(x, y)
+    })
+    .catch((error) => {
+      console.error("날씨정보 prefetch 실패:", error);
+      queryClient.setQueryData(weatherQueryKey, null);
+    });
+
+  const astronomyPrefetch = queryClient
+    .prefetchQuery({
+      queryKey: astronomyQueryKey,
+      queryFn: () =>
+        getBasicAstronomyInformation(mountainData.lat, mountainData.lon)
+    })
+    .catch((error) => {
+      console.error("천문정보 prefetch 실패:", error);
+      queryClient.setQueryData(astronomyQueryKey, null);
+    });
+
+  await Promise.all([weatherPrefetch, astronomyPrefetch]);
+
 
   return {
     props: {
