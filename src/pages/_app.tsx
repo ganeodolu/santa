@@ -1,12 +1,12 @@
 import AppProviders from "@/app/provider";
 import GlobalLayout from "@/app/ui/GlobalLayout";
+import MetaTags from "@/shared/ui/MetaTags";
 import "@/styles/globals.css";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
 import Head from "next/head";
 import type { ReactElement, ReactNode } from "react";
-import MetaTags from "@/shared/ui/MetaTags";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -35,6 +35,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <MetaTags
         title="산타보아"
         description="국립공원 산에 대한 모든 것! 18개 산악형 국립공원의 지도, 날씨, 일출, 일몰, CCTV 정보를 알려드립니다."
