@@ -15,12 +15,12 @@ const MountainInformation = ({ mountainData }: MountainData ) => {
   return (
     <>
       <section className="mb-4 flex">
-        <div className="w-[240px] overflow-hidden pr-4 pl-4">
+        <div className="w-[230px] overflow-hidden pr-4 pl-4">
           <Image
             className="h-[150px] rounded-lg object-cover"
             src={imageSrc}
             alt={name}
-            width={208}
+            width={198}
             height={150}
             quality={50}
           />
