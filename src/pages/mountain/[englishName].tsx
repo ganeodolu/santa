@@ -88,10 +88,6 @@ export const getStaticProps: GetStaticProps<MountainPageProps> = async ({
       queryKey: weatherQueryKey,
       queryFn: () => getBasicWeatherInformation(x, y)
     })
-    .catch((error) => {
-      console.error("날씨정보 prefetch 실패:", error);
-      queryClient.setQueryData(weatherQueryKey, null);
-    });
 
   const astronomyPrefetch = queryClient
     .prefetchQuery({
@@ -99,12 +95,20 @@ export const getStaticProps: GetStaticProps<MountainPageProps> = async ({
       queryFn: () =>
         getBasicAstronomyInformation(mountainData.lat, mountainData.lon)
     })
-    .catch((error) => {
-      console.error("천문정보 prefetch 실패:", error);
-      queryClient.setQueryData(astronomyQueryKey, null);
-    });
 
-  await Promise.all([weatherPrefetch, astronomyPrefetch]);
+  const [weatherResult, astronomyResult] = await Promise.allSettled([
+    weatherPrefetch,
+    astronomyPrefetch
+  ]);
+
+  if (weatherResult.status === "rejected") {
+    console.error("날씨정보 prefetch 실패:", weatherResult.reason);
+    queryClient.setQueryData(weatherQueryKey, null);
+  }
+  if (astronomyResult.status === "rejected") {
+    console.error("천문정보 prefetch 실패:", astronomyResult.reason);
+    queryClient.setQueryData(astronomyQueryKey, null);
+  }
 
 
   return {
