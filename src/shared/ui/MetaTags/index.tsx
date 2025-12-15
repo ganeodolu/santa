@@ -24,7 +24,7 @@ const MetaTags = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
       <meta property="og:type" content={ogType} />
-      {<meta property="og:url" content={url} />}
+      <meta property="og:url" content={url} />
     </Head>
   );
 };

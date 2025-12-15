@@ -43,7 +43,7 @@ const MountainPage: NextPageWithLayout<MountainPageProps> = ({
         keywords={`${mountainData.name}, 국립공원, 산, 날씨, 위치, 지도, CCTV`}
         url={`${DEFAULT_URL}/mountain/${mountainData.englishName}`}
       />
-      <MountainView mountainData={mountainData} />;
+      <MountainView mountainData={mountainData} />
     </>
   );
 };
