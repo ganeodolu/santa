@@ -24,6 +24,10 @@ const nextConfig = {
         pathname: "/**"
       }
     ]
+  },
+  // Turbopack 관련 경고를 끄기 위해 빈 객체 설정
+  experimental: {
+    turbopack: {}
   }
 };
 
